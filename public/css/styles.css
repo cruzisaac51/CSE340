@@ -2,5 +2,116 @@
 *,
 *:before,
 *:after {
+  margin:0;
+  padding:0;
   box-sizing: border-box;
+  -webkit-box-sizing:border-box;
+}
+body {
+  margin:0;
+  padding:0;
+  background-image: url(../images/site/small_check.jpg);
+}
+#wrapper {
+  background-color: white;
+  height: 5000px;
+}
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 5px;
+
+}
+#top-header a {
+  text-decoration: none;
+  text-decoration-skip-ink:auto;
+}
+.siteName{
+  font-size: xx-large;
+}
+#tools{
+  font-size: large;
+}
+nav {
+  background: black;
+  color: white;
+  margin: 0 5px;
+}
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 10px 3px;
+  margin: 10px;
+}
+.boudy{
+  margin:5px
+}
+.banner-one {
+  margin-bottom: 20px;
+}
+.hero {
+  background-image: url(../images/vehicles/delorean.jpg);
+  height: 200px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-left: 35px;
+}
+.action{
+  background-color: rgba(255, 255,255,.3);
+  color: cornflowerblue;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+  margin-left: -15px;
+}
+.action ul {
+  list-style: none;
+}
+.action button{
+  background-color: blueviolet;
+  color: black;
+  font-size: larger;
+  font-weight: bolder;
+  border-radius: 5px;
+  height: 2em;
+}
+.details{
+  margin-bottom: 20px;
+}
+.details ul {
+  margin-left: 20px;
+}
+.upgrades{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+.imgupgrade {
+  position: relative;
+  background-color: cornflowerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgupgrade img {
+  width: 5em;
+  height: auto;
+  margin: 5px 0 40px 0;
+}
+.imgname {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  padding: 10px;
+}
+.imgname a {
+  display: block;
+  text-align: center;
 }
