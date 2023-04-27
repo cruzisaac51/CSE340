@@ -5,7 +5,7 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
-  -webkit-box-sizing:border-box;
+  /*-webkit-box-sizing:border-box;*/
 }
 body {
   margin:0;
@@ -14,7 +14,6 @@ body {
 }
 #wrapper {
   background-color: white;
-  height: 5000px;
 }
 #top-header {
   display: flex;
@@ -45,7 +44,7 @@ nav ul {
   margin: 10px;
 }
 .boudy{
-  margin:5px
+  margin:5px;
 }
 .banner-one {
   margin-bottom: 20px;
@@ -114,4 +113,52 @@ nav ul {
 .imgname a {
   display: block;
   text-align: center;
+}
+
+@media (width >= 600px)  {
+  .siteName{
+    font-size: xxx-large;
+  }
+  #tools {
+    font-size: x-large;
+  }
+  nav ul {
+    justify-content: space-around;
+  }
+  .hero {
+    background-image: url(../images/vehicles/delorean.jpg);
+    height: 350px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    background-position: right;
+  }
+  #wrapper{
+    border: 5px solid cornflowerblue;
+    width: 90%;
+    height: 90%;
+    margin: 70px;
+    border-radius: 10px;
+  }
+  .action{
+    margin-left: 100px;
+  }
+  .action h2 {
+    font-size: xxx-large;
+  }
+  .action ul li {
+    font-size: x-large;
+  }
+  .bigscreen{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row-reverse;
+  }
+  .details ul {
+    font-size: larger;
+    -webkit-user-modify: read-write-plaintext-only;
+  }
+  .upgrades {
+    width: 33vmax;
+  }
 }
