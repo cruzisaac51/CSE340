@@ -234,3 +234,31 @@ VALUES   (
     'White',
     5
   );
+
+INSERT INTO public.account (
+    account_firstname,
+    account_lastname,
+    account_email,
+    account_password
+)
+VALUES (
+    'Tony',
+    'Stark',
+    'tony@starkent.com',
+    'Iam1ronM@n'
+
+);
+
+UPDATE account
+    set account_type = '<Admin' 
+    where account_id = 1;
+
+DELETE from account 
+    where account_id = 1;
+
+
+  
+
+UPDATE inventory
+    SET INV_DESCRIPTION = REGEXP_REPLACE(INV_DESCRIPTION,'small interiors', 'huge Interiors') 
+    WHERE inv_model = 'Hummer';
