@@ -18,7 +18,7 @@ VALUES (
 
 --Update Tony to Admin
 UPDATE account
-    set account_type = '<Admin' 
+    set account_type = 'Admin' 
     where account_id = 1;
 
 
