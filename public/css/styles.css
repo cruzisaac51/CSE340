@@ -114,6 +114,13 @@ nav ul {
   display: block;
   text-align: center;
 }
+#inv-display{
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+}
 
 @media (width >= 600px)  {
   .siteName{
@@ -160,5 +167,8 @@ nav ul {
   }
   .upgrades {
     width: 33vmax;
+  }
+  #inv-display{
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
