@@ -1,42 +1,44 @@
 const invModel = require("../models/inventory-model")
-const Util = {}
+
 
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
-async function getNav(req, res, next) {
-  let data = await invModel.getClassifications()
-  let list = "<ul>"
-  list += '<li><a href="/" title="Home page">Home</a></li>'
-  data.rows.forEach((row) => {
-    list += "<li>"
-    list +=
-      '<a href="/inv/type/' +
-      row.classification_id +
-      '" title="See our inventory of ' +
-      row.classification_name +
-      ' vehicles">' +
-      row.classification_name +
-      "</a>"
-    list += "</li>"
-  })
-  list += "</ul>"
-  try {
-    return list
-  } catch (error) {
-    console.log(error)
-    return ""
+class Util {
+  constructor() { }
+
+  async getNav(req, res, next) {
+    try {
+      let data = await invModel.getClassifications()
+      let list = "<ul>"
+      list += '<li><a href="/" title="Home page">Home</a></li>'
+      data.rows.forEach((row) => {
+        list += "<li>"
+        list +=
+          '<a href="/inv/type/' +
+          row.classification_id +
+          '" title="See our inventory of ' +
+          row.classification_name +
+          ' vehicles">' +
+          row.classification_name +
+          "</a>"
+        list += "</li>"
+      })
+      list += "</ul>"
+      return list
+    } catch (error) {
+      console.log(error)
+      return ""
+    }
   }
-}
-
-module.exports = Util
 
 
 
-/* **************************************
-* Build the classification view HTML
-* ************************************ */
-Util.buildClassificationGrid = async function(data){
+
+  /* **************************************
+  * Build the classification view HTML
+  * ************************************ */
+  async buildClassificationGrid(data){
     let grid
     if(data.length > 0){
       grid = '<ul id="inv-display">'
@@ -65,4 +67,9 @@ Util.buildClassificationGrid = async function(data){
       grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
     return grid
+  } 
 }
+
+const utilities = new Util()
+
+module.exports = utilities
