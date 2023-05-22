@@ -4,7 +4,7 @@ const Util = {}
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
-Util.getNav = async function (req, res, next) {
+async function getNav(req, res, next) {
   let data = await invModel.getClassifications()
   let list = "<ul>"
   list += '<li><a href="/" title="Home page">Home</a></li>'
@@ -21,7 +21,12 @@ Util.getNav = async function (req, res, next) {
     list += "</li>"
   })
   list += "</ul>"
-  return list
+  try {
+    return list
+  } catch (error) {
+    console.log(error)
+    return ""
+  }
 }
 
 module.exports = Util
