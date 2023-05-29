@@ -43,6 +43,14 @@ nav ul {
   padding: 10px 3px;
   margin: 10px;
 }
+nav ul li {
+  padding: 5px;
+  border-radius: 5px;
+}
+nav ul li a {
+  text-decoration: none;
+  color: white;
+}
 .boudy{
   margin:5px;
 }
@@ -77,6 +85,9 @@ nav ul {
   font-weight: bolder;
   border-radius: 5px;
   height: 2em;
+}
+.borderdetails{
+  border: 2px solid black;
 }
 .details{
   margin-bottom: 20px;
@@ -120,6 +131,68 @@ nav ul {
   grid-template-columns: 1fr;
   align-items: center;
   justify-items: center;
+  list-style: none;
+}
+#inv-displayli{
+  display: flex;
+  border: 5px solid black;
+  border-radius: 15px;
+  margin: 10px;
+  padding: 10px;
+  overflow: hidden;
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  flex-direction: column;
+  align-items: center;
+  background-color: black;
+  color: white;
+}
+#inv-displayli:hover{
+  margin: 0px;
+  padding: 0px;
+}
+.title{
+  text-decoration: underline;
+  text-decoration-style: double;
+  -webkit-text-stroke: thin;
+}
+.namePrice a{
+  color: white;
+}
+.image-display{
+  display: flex;
+  margin: 10px;
+}
+.image-display img {
+  width: -webkit-fill-available;
+}
+.details-display{
+  margin: 5px;
+  display: grid;
+  row-gap: 10px;
+  font-size: large;
+  background-color: black;
+  padding: 5px;
+  color: white;
+}
+.error-page{
+  background-image: linear-gradient(rgba(0, 0, 255, 0.4), rgba(255, 255, 0, 0.4)), url(../images/site/Parkingbg.jpg);
+  display: flex;
+  flex-direction: column;
+  background-size: 100% 100%;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+}
+.error-page h1 {
+  font-size: 100px;
+  text-shadow: 4px 2px 6px white;
+}
+.error-page h2 {
+  text-align: -webkit-center;
+  margin: 14px;
+  text-shadow: 4px 2px 6px white;
+  font-size: 5em;
 }
 
 @media (width >= 600px)  {
@@ -131,6 +204,25 @@ nav ul {
   }
   nav ul {
     justify-content: space-around;
+  }
+  nav ul li {
+    padding: 10px;
+    border-radius: 5px;
+  }
+  nav ul li:hover{
+    background-color: white;
+    padding: 15px;
+  }
+  nav ul li a {
+    padding: 1em;
+    text-decoration: none;
+    color: white;
+    font-size: large;
+  }
+  nav ul li a:hover{
+    color: black;
+    padding: 2em;
+    font-size: x-large;
   }
   .hero {
     background-image: url(../images/vehicles/delorean.jpg);
@@ -158,8 +250,8 @@ nav ul {
   }
   .bigscreen{
     display: flex;
-    justify-content: space-evenly;
-    flex-direction: row-reverse;
+    height: 35em;
+    justify-content: space-around;
   }
   .details ul {
     font-size: larger;
@@ -170,5 +262,23 @@ nav ul {
   }
   #inv-display{
     grid-template-columns: 1fr 1fr 1fr;
+  }
+  .image-display {
+    display: flex;
+    width: 35em;
+    height: fit-content;
+  }
+  .details-display{
+    margin-bottom: 2em;
+    display: grid;
+    row-gap: 10px;
+    font-size: large;
+    padding: 5px;
+    color: white;
+    width: 30em;
+  }
+  .details-display * {
+    background: linear-gradient(#0a0808 30%, 68%, #f2f2f7 100%);
+    font-weight: bolder;
   }
 }
