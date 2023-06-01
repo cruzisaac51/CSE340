@@ -51,4 +51,5 @@ const invModel = {}
     }
   }
 
+
 module.exports = invModel

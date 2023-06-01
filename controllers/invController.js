@@ -34,7 +34,7 @@ const invCont = {}
     const modelv = data1[0].inv_model
     const title = `${yearv} ${makev} ${modelv}`
     const grid1 = await utilities.buildVehicleGrid(data1)
-    console.log("data1", data1);
+    //console.log("data1", data1);
     const nav = await utilities.getNav()
     res.render("./inventory/details", {
       title: `${title}`,
