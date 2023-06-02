@@ -10,7 +10,7 @@ const invCont = {}
     const data = await invModel.getInventoryByClassificationId(classification_id)
     let nav = await utilities.getNav()
     const className = data[0].classification_name
-    console.log("build", className)
+    //console.log("build", className)
     const grid = await utilities.buildClassificationGrid(data)
     res.render("./inventory/classification", {
       title: `${className}  vehicles`,

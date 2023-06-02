@@ -11,7 +11,6 @@ const app = express()
 
 const expressLayouts = require("express-ejs-layouts")
 const baseController = require("./controllers/baseController")
-//const accountController = require("./controllers/accountController")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
@@ -41,7 +40,7 @@ app.use(function(req, res, next){
   next()
 })
 
-
+//process user registration
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
@@ -84,7 +83,7 @@ app.use(async (req, res, next) => {
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
-  console.error(`Error at: "${req.originalUrl}": ${err.message}`)
+  console.error(`Error at: "${req.originalUrl}": ${err.message} - ${res.message} - ${next.message}`)
   if(err.status == 404){
      message = err.message
   } else {

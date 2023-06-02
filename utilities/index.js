@@ -1,6 +1,5 @@
 const invModel = require("../models/inventory-model")
-const accModel = require("../models/account-model")
-
+const accountModel = require("../models/account-model");
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -106,7 +105,7 @@ const Util = {}
       
     } catch (error) {
         console.error("buildClassificationGrid", error)
-        console.log("yoooo1", data1)
+        //console.log("yoooo1", data1)
         return ''
     }
   }
@@ -118,9 +117,9 @@ const Util = {}
     try{
       let form1 = '<form action="/login" method="post" id="loginform">'
       form1 += '<label for="email"> Email Address</label>'
-      form1 += '<input type="email" name="email" id="email">'
+      form1 += '<input type="email" name="email" id="email" autocomplete="email" required>'
       form1 += '<label for="password"> Password </label>'
-      form1 += `<input type="password" name="password" id="password" class="checkaligne"><input type="checkbox" class="custom-checkbox" id="showPass">`;
+      form1 += `<input type="password" name="password" id="password" class="checkaligne" autocomplete="current-password" required><input type="checkbox" class="custom-checkbox" id="showPass">`;
       form1 += '<p>Password must be at least 12 characters contain at least 1 capital letter, contain at least 1 number, contain at least 1 special character</p>'
       form1 += '<button type="submit" form="loginform" value="Login">Submit</button>'
       form1 += '<h2 class="signup"> No Account? <a href="/account/registration">sign-up</a></h2>'
@@ -137,15 +136,15 @@ const Util = {}
 
   Util.builduserregristation = async (req, res, next)=>{
     try {
-      let form2 = '<form action="/register" method="post" id="registerform">'
+      let form2 = '<form action="/account/registration" method="post" id="registerform">'
         form2 += '<label for="name"> First Name</label>'
-        form2 += '<input type="name" name="first name" id="name" required>'
+        form2 += '<input type="name" name="account_firstname" id="name" required autocomplete="given-name">'
         form2 += '<label for="lastname"> Last Name</label>'
-        form2 += '<input type="lastname" name="lastname" id="lastname" required>'
+        form2 += '<input type="lastname" name="account_lastname" id="lastname" required autocomplete="family-name">'
         form2 += '<label for="email"> Email Address</label>'
-        form2 += '<input type="email" name="email" id="email" required>'
+        form2 += '<input type="email" name="account_email" id="email" required autocomplete="email">'
         form2 += '<label for="password"> Password </label>'
-        form2 += `<input type="password" name="password" id="password" class="checkaligne" required><input type="checkbox" class="custom-checkbox" id="showPass">`;
+        form2 += `<input type="password" name="account_password" id="password" class="checkaligne" autocomplete="new-password" required><input type="checkbox" class="custom-checkbox" id="showPass">`;
         form2 += '<p>Password must be at least 12 characters contain at least 1 capital letter, contain at least 1 number, contain at least 1 special character</p>'
         form2 += '<button type="submit" form="registerform" value="register">Register</button>'
         form2 += '</form>';

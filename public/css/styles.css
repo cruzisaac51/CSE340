@@ -151,7 +151,7 @@ form input {
   background-size: 80%;
   background-repeat: no-repeat;
   background-image: url(../images/site/eye-closed.svg);
-  background-color: #f2f2f7;
+  background-color: white;
 }
 .showp {
   background-color: black;
@@ -363,5 +363,16 @@ form button {
   .details-display * {
     background: linear-gradient(#0a0808 30%, 68%, #f2f2f7 100%);
     font-weight: bolder;
+  }
+  .login-page, .register-page{
+    margin-left: 20em;
+    margin-right: 20em;
+  }
+  form p{
+    font-size: medium;
+    margin: 20px 20px;
+  }
+  .signup {
+    margin-top: 1em;
   }
 }
