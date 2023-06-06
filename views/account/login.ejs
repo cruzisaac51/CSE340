@@ -5,14 +5,28 @@
         res.redirect('/')
     } %>
 
-<%- messages() %>
+    <%- messages() %>
 
-    <%- login %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+    <% } %>
+
+<form action="/account/login" method="post" id="loginform">
+    <label for="account_email"> Email Address</label>
+    <input type="email" name="account_email" id="account_email" placeholder=" " pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required value="<%= locals.account_email %>">
+    <label for="account_password"> Password </label>
+    <input type="password" name="account_password" id="account_password" class="checkaligne" placeholder=" " pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{12,}" required>
+    <label for="showPass" class="inviciblelabel"> checkbox </label>
+    <input type="checkbox" name="showPass" class="custom-checkbox" id="showPass">
+    <p>Password must be at least 12 characters contain at least 1 capital letter, contain at least 1 number, contain at least 1 special character</p>
+    <button type="submit" form="loginform" value="Login">Submit</button>
+    <h2 class="signup"> No Account? <a href="/account/registration">sign-up</a></h2>
+</form>
 </section>
-
-
-    <%- skrp %> 
-
 
 
 

@@ -1,0 +1,6 @@
+@media (width >= 600px)  {
+    .borderdetails {
+        border: none;
+        width: 100%;
+    }
+}

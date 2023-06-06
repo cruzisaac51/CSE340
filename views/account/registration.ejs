@@ -1,11 +1,34 @@
 <section class="register-page">
     <% if (title) { %>
-    <h1><%= title %></h1>
+    <h1 class="regtitle"><%= title %></h1>
     <% } else {
         res.redirect('/')
     } %>
+
+    <%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+    <% } %>
         
     
-    <%- register %>
-    <%- skrp %> 
+    <form action="/account/registration" method="post" id="registerform">
+        <label for="account_firstname"> First Name</label>
+        <input type="text" name="account_firstname" id="account_firstname" placeholder=" " pattern="[A-Za-z]{2,15}" required value="<%= locals.account_firstname %>">
+        <label for="account_lastname"> Last Name</label>
+        <input type="text" name="account_lastname" id="account_lastname" placeholder=" " pattern="[A-Za-z]{2,15}" required value="<%= locals.account_lastname %>">
+        <label for="account_email"> Email Address</label>
+        <input type="email" name="account_email" id="account_email" placeholder=" " pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}$" required value="<%= locals.account_email %>">
+        <label for="account_password"> Password </label>
+        <input type="password" name="account_password" id="account_password" class="checkaligne" placeholder=" " pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{12,}" required>
+        <label for="showPass" class="inviciblelabel">checkbox</label>
+        <input type="checkbox" class="custom-checkbox" id="showPass">
+        <p>Password must be at least 12 characters contain at least 1 capital letter, contain at least 1 number, contain at least 1 special character</p>
+        <button type="submit" form="registerform" value="register">Register</button>
+    </form>
+
 </section>

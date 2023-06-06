@@ -1,0 +1,52 @@
+@media (width >= 600px)  {
+    #wrapper {
+        border: none;
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        border-radius: 0px;
+    }
+    #top-header {
+        margin: 0px;
+        background-color: black;
+        padding: 5px 10px 0px 10px;
+    }
+    #top-header a{
+        color: darkgray;
+    }
+    nav {
+        background: linear-gradient(45deg, black, #636363);
+        color: white;
+        margin: 0px;
+        position: relative;
+        z-index: 1;
+    }
+    nav ul {
+        margin: 0px;
+    }
+    .boudy {
+        margin: 0px;
+    }
+    .borderdetails {
+        border: none;
+        width: 100%;
+    }
+    .bigscreen {
+        display: flex;
+        justify-content: space-around;
+    }
+    .details-display {
+        display: grid;
+        row-gap: 15px;
+        font-size: 23px;
+        color: black;
+        margin-left: 0.5em;
+        padding: 0;
+    }
+    .title {
+        color: white;
+        font-size: 3em;
+        border-inline: none;
+        background-color: black;
+    }
+}

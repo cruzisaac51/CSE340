@@ -98,12 +98,15 @@ nav ul li a {
     background-color: aqua;
     align-items: center;
 }
+.regtitle{
+  margin: 1em;
+}
 form {
   display: flex;
   flex-direction: column;
   font-size: larger;
   font-weight: bolder;
-  margin: 10px;
+  margin: 15px;
 }
 form p {
   font-size: small;
@@ -119,7 +122,8 @@ form input {
 .custom-checkbox {
   margin-left: auto;
   margin-top: -30px;
-  margin-right: 15px;
+  margin-right: 38px;
+  opacity: 0.4;
 }
 
 /* Create your custom checkbox */
@@ -135,18 +139,13 @@ form input {
   background-image: url(../images/site/eye-open.svg);
 }
 
-/* When the checkbox is checked, add a blue background */
-.custom-checkbox:checked::before {
-  background-color: #ffffff;
-}
-
 /* Add a checkmark to the checkbox */
 .custom-checkbox:checked::after {
   content: "";
   display: flex;
   width: 21px;
   height: 16px;
-  margin-top: -17px;
+  margin-top: -16px;
   margin-left: 0px;
   background-size: 80%;
   background-repeat: no-repeat;
@@ -164,6 +163,31 @@ form button {
   margin-right: auto;
   cursor: pointer;
 }
+
+.inviciblelabel{
+  display: none;
+}
+
+input:not(:focus):not(:placeholder-shown):invalid {
+  background-image: url(../images/site/invalid.gif);
+  background-size: 2em;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+input:not(:focus):invalid {
+  background-image: url(../images/site/user.gif);
+  background-size: 1.2em;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+input:not(:focus):not(:placeholder-shown):valid {
+  background-image: url(../images/site/greencheck.gif);
+  background-size: 2em;
+  background-repeat: no-repeat;
+  background-position: right;
+}
 .signup {
   font-size: larger;
   margin-left: auto;
@@ -171,6 +195,7 @@ form button {
 }
 .borderdetails{
   border: 2px solid black;
+  max-width: -webkit-fill-available;
 }
 .details{
   margin-bottom: 20px;
@@ -212,32 +237,35 @@ form button {
   display: grid;
   gap: 22px;
   grid-template-columns: 1fr;
-  align-items: center;
-  justify-items: center;
   list-style: none;
+  background: linear-gradient(201deg, #000000e6, transparent);
+  backdrop-filter: brightness(0.5);
 }
-#inv-displayli{
+.inv-displayli{
   display: flex;
-  border: 5px solid black;
-  border-radius: 15px;
-  margin: 10px;
-  padding: 10px;
-  overflow: hidden;
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
   flex-direction: column;
   align-items: center;
-  background-color: black;
+  margin-top: 10px;
+  backdrop-filter: brightness(0.5);
+}
+.inv-displayli a{
   color: white;
 }
-#inv-displayli:hover{
+.inv-displayli img{
+  width: 40vmax;
+  box-shadow: 6px 9px 6px 3px black;
+  border-radius: 5px 5px 0px 0px;
+}
+.inv-displayli:hover{
   margin: 0px;
   padding: 0px;
 }
 .title{
-  text-decoration: underline;
-  text-decoration-style: double;
-  -webkit-text-stroke: thin;
+  position: relative;
+  color: white;
+  border: 5px solid;
+  background-color: black;
+  margin: 0px;
 }
 .namePrice a{
   color: white;
@@ -247,7 +275,14 @@ form button {
   margin: 10px;
 }
 .image-display img {
-  width: -webkit-fill-available;
+  width: 42vmax;
+}
+.namePrice {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  text-align: center;
+  place-self: stretch;
+  padding: 10px 0px;
 }
 .details-display{
   margin: 5px;
@@ -278,9 +313,32 @@ form button {
   font-size: 5em;
 }
 
+.notice ul {
+  font-size: 100px;
+  text-shadow: 4px 2px 6px white;
+}
+.notice li {
+  text-align: -webkit-center;
+  margin: 14px;
+  text-shadow: 4px 2px 6px white;
+  font-size: 2em;
+  list-style: inside;
+  color: red;
+  font-weight: bolder;
+}
+
+
 @media (width >= 600px)  {
+  .boudy {
+    display: flex;
+    justify-content: center;
+  }
+  .index-page{
+    display: flex;
+    flex-direction: column;
+  }
   .siteName{
-    font-size: xxx-large;
+    font-size: 3.5em;
   }
   #tools {
     font-size: x-large;
@@ -333,7 +391,6 @@ form button {
   }
   .bigscreen{
     display: flex;
-    height: 35em;
     justify-content: space-around;
   }
   .details ul {
@@ -344,12 +401,20 @@ form button {
     width: 33vmax;
   }
   #inv-display{
-    grid-template-columns: 1fr 1fr 1fr;
+    display: grid;
+    margin-top: 0.5em;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 1fr));
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    align-items: center;
+  }
+  .inv-displayli img {
+    width: 27vmax;
   }
   .image-display {
-    display: flex;
-    width: 35em;
-    height: fit-content;
+    margin: 0px;
+    display: block;
   }
   .details-display{
     margin-bottom: 2em;
@@ -357,16 +422,19 @@ form button {
     row-gap: 10px;
     font-size: large;
     padding: 5px;
+    color: black;
+    background-color: white;
+  }
+  .details-display h3 {
     color: white;
-    width: 30em;
+    background: linear-gradient(45deg, black, transparent);
   }
   .details-display * {
-    background: linear-gradient(#0a0808 30%, 68%, #f2f2f7 100%);
     font-weight: bolder;
   }
   .login-page, .register-page{
-    margin-left: 20em;
-    margin-right: 20em;
+    margin: 1em 11rem 1em 11rem;
+    max-width: 39em;
   }
   form p{
     font-size: medium;

@@ -23,7 +23,7 @@ const invCont = {}
 
 
   /* ***************************
-  *  Build build a specific inventory item detail view.
+  *  Build specific inventory item detail view.
   * ************************** */
 
   invCont.buildById = async (req, res, next) => {

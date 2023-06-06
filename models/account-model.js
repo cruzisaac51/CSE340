@@ -3,6 +3,20 @@ const pool = require("../database/")
 const accModel = {}
 
 /* *****************************
+*   login account
+* *************************** */
+    accModel.loginUserAcount = async (account_email, account_password) =>{
+        try {
+            const datalog = "SELECT  *  FROM public.account  where account_email= $1 and account_password= $2 "
+            const accesornot = await pool.query(datalog,[account_email, account_password])
+            return accesornot
+        } catch (error) {
+            return error.message
+        }
+    }
+
+
+/* *****************************
 *   Register new account
 * *************************** */
     accModel.registerAccount = async (account_firstname, account_lastname, account_email, account_password) =>{
@@ -17,6 +31,27 @@ const accModel = {}
         }
     }
 
+    /* **********************
+ *   Check for existing email
+ * ********************* */
+    accModel.checkExistingEmail = async (account_email) =>{
+        try {
+            const sql = "SELECT * FROM account WHERE account_email = $1"
+            const email = await pool.query(sql, [account_email])
+            return email.rowCount
+        } catch (error) {
+            return error.message
+        }
+    }
+    accModel.checkExistingPassword = async (account_password) =>{
+        try {
+            const sql1 = "SELECT * FROM account WHERE account_password = $1"
+            const password = await pool.query(sql1, [account_password])
+            return password.rowCount
+        } catch (error) {
+            return error.message
+        }
+    }
 
     // accModel.getaccount = async () => {
     //     return await pool.query("SELECT * FROM public.account ORDER BY account_id")

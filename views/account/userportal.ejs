@@ -1,0 +1,11 @@
+<section class="user-page">
+    <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+<%- messages() %>
+
+
+
+</section>

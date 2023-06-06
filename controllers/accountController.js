@@ -1,6 +1,8 @@
 const path = require("path");
 const utilities = require("../utilities/")
+const bcrypt = require("bcryptjs")
 const accountModel = require("../models/account-model");
+const { body } = require("express-validator")
 
 
 
@@ -10,40 +12,78 @@ class LoginBuild {
     }
 
     // Methods
-
+     /* ***************************
+    *  Build Login view.
+    * ************************** */
     async buildLogin(req, res) {
-        let login = await utilities.builduserlogin();
-        let skrp = '<script>' + `document.querySelector("#showPass").addEventListener("click", () =>{ const checkbox = document.getElementById("password"); if (checkbox.type === "password") { checkbox.type = "text"; }else { checkbox.type = "password"; }; })`;
-        skrp +='</script>';
         let nav = await utilities.getNav();
         return res.render("./account/login", {
         title: "Sign in",
         nav,
-        login,
-        skrp
+        errors:null,
         });
     }
+
+     /* ***************************
+    *  Build Registration view.
+    * ************************** */
 
     async buildregistration(req, res) {
-        let register = await utilities.builduserregristation();
-        let skrp = '<script>' + `document.querySelector("#showPass").addEventListener("click", () =>{ const checkbox = document.getElementById("password"); if (checkbox.type === "password") { checkbox.type = "text"; }else { checkbox.type = "password"; }; })`;
-        skrp +='</script>';
         let nav = await utilities.getNav();
         return res.render("./account/registration", {
-        title: "Sign up",
+        title: "Create Your Account",
         nav,
-        register,
-        skrp
+        errors: null,
         });
     }
 
+    /* ***************************
+    *  check login view.
+    * ************************** */
+
+    async loginuserAccount(req, res) {
+        let nav = await utilities.getNav();
+        const { account_email, account_password } = req.body;
+        const regResult = await accountModel.loginUserAcount(account_email,account_password)
+        if (regResult) {
+            req.flash("notice", "Welcome");
+            return res.status(201).render("./", {
+            title: "Home",
+            nav,
+            });
+        } else {
+            req.flash("notice", "Sorry, the registration failed.")
+            console.log("email??error");
+            return res.status(401).render("./account/login", {
+                title: "Sign in",
+                nav,
+                errors: null,
+            })
+        }
+    }
+        
+
+
+    /* ***************************
+    *  check Registration view.
+    * ************************** */
+
     async registeruserAccount(req, res) {
-        let login = await utilities.builduserlogin();
-        let skrp = '<script>' + `document.querySelector("#showPass").addEventListener("click", () =>{ const checkbox = document.getElementById("password"); if (checkbox.type === "password") { checkbox.type = "text"; }else { checkbox.type = "password"; }; })`;
-        skrp +='</script>';
         let nav = await utilities.getNav();
         const { account_firstname, account_lastname, account_email, account_password } = req.body;
-        const regResult = await accountModel.registerAccount(account_firstname,account_lastname,account_email,account_password)
+        let hashedPassword
+        try {
+            // regular password and cost (salt is generated automatically)
+            hashedPassword = await bcrypt.hashSync(account_password, 10)
+        } catch (error) {
+            req.flash("notice", 'Sorry, there was an error processing the registration.')
+            res.status(500).render("account/registration", {
+            title: "Create Your Account",
+            nav,
+            errors: null,
+            })
+        }
+        const regResult = await accountModel.registerAccount(account_firstname,account_lastname,account_email,hashedPassword)
         if (regResult) {
             req.flash(
                 "notice",
@@ -52,13 +92,12 @@ class LoginBuild {
             return res.status(201).render("./account/login", {
                 title: "Sign in",
                 nav,
-                login,
-                skrp
+                errors: null,
             });
         } else {
             req.flash("notice", "Sorry, the registration failed.")
             return res.status(501).render("./account/registration", {
-                title: "Registration",
+                title: "Create Your Account",
                 nav,
                 errors: null,
             })
