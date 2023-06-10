@@ -1,3 +1,7 @@
+window.addEventListener('load', function () {
+    document.getElementsByTagName("html")[0].style.visibility = "visible";
+});
+
 const showPass = document.querySelector("#showPass");
 if (document.getElementById("account_password")) {
     showPass.addEventListener("click", () => {
@@ -33,3 +37,13 @@ function checkUrl() {
 }
 
 checkUrl();
+
+
+document.querySelector(".menu-btn").addEventListener("click", () => {
+    document.querySelector(".nav-menu").classList.toggle("show");
+});
+
+document.querySelector(".andale").addEventListener("click", () => {
+    document.querySelector("span").classList.toggle("show");
+    document.querySelector("span:nth-child(2)").classList.toggle("blck");
+});

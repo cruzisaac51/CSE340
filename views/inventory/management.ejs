@@ -1,0 +1,13 @@
+<section class="login-page">
+<% if (title) { %>
+    <h1 class="managetitle"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <%- messages() %>
+
+
+    <%- grid %>
+
+</section>

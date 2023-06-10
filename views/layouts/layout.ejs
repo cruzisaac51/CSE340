@@ -4,9 +4,19 @@
 
 <body>
     <div id="wrapper">
-        <%- include("../partials/header")  %>
-        <%- include("../partials/navigation")  %>
-    
+        <div class="menu-btn">
+            <a href="#>" class="andale" >
+                <span>
+                    <i class="fas fa-bars fa-2x"></i>
+                </span>
+                <span class="span2">
+                    <i class="fa-solid fa-xmark-large"></i>
+                </span>
+            </a>
+            
+            <%- include("../partials/header")  %>
+            <%- include("../partials/navigation")  %>
+        </div>
         <main class="boudy">
             <%- body %>
         </main>

@@ -1,4 +1,4 @@
-const invModel = require("../models/inventory-model")
+const invModel = require("../models/inventory-model");
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -7,14 +7,14 @@ const Util = {}
   Util.getNav = async (req, res, next)=>{
     try {
       let data = await invModel.getClassifications();
-      let list = "<ul>";
+      let list = "<ul class='nav-menu'>";
       list += '<li><a href="/" title="Home page">Home</a></li>';
       data.rows.forEach((row) => {
         list += "<li>";
         list +=
           '<a href="/inv/type/' +
           row.classification_id +
-          '" title="See our inventory of ' +
+          '" class="active" title="See our inventory of ' +
           row.classification_name +
           ' vehicles">' +
           row.classification_name +
@@ -29,6 +29,30 @@ const Util = {}
     }
   }
 
+  Util.getnewNav = async (req, res, next)=>{
+    try {
+      let data = await invModel.getClassifications();
+      let list = "<ul class='nav-menu'>";
+      list += '<li><a href="/" title="Home page">Home</a></li>';
+      data.rows.forEach((row) => {
+        list += "<li>";
+        list +=
+          '<a href="/inv/type/' +
+          row.classification_id +
+          '" class="active" title="See our inventory of ' +
+          row.classification_name +
+          ' vehicles">' +
+          row.classification_name +
+          "</a>";
+        list += "</li>";
+      });
+      list += "</ul>";
+      return list;
+    } catch (error) {
+      console.log("is here the errorr?", error);
+      throw error;
+    }
+  }
 
 
 
@@ -107,7 +131,35 @@ const Util = {}
         return ''
     }
   }
-  
+  Util.buildmanagementGrid = async()=>{
+    let grid = []
+    grid +=`<div class="linksmanagement">`
+    grid +=`<a href="/inv/addclassification/" title="add clasification" class="anchorsmanagement">add new classification</a>`
+    grid +=`<a href="/inv/addinventory/" class="anchorsmanagement">add new inventory </a>`
+    grid +=`</div>`
+
+    return grid
+  }
+
+  Util.buildaddnewcarform = async(req, res, next)=>{
+    try {
+      let data = await invModel.getClassifications();
+      let grid = []
+      grid += ` <label for="classificationcars"> Classification</label>
+          <select id="classificationcars" name="classificationcars">`
+      grid += ` <option value="" disabled selected id="nonedisplay">&#10003; Choose a classification:</option>`
+      for (let row of data.rows) {
+        grid += `<option value="${row.classification_id}">${row.classification_name}</option>`;
+      }       
+          grid += `</select>`
+
+        return grid
+    } catch (error) {
+      console.log("is here the errorr?---", error);
+      throw error;
+    }
+  }
+
   /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

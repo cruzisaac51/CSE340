@@ -17,7 +17,7 @@
     nav {
         background: linear-gradient(45deg, black, #636363);
         color: white;
-        margin: 0px;
+        margin: 5px;
         position: relative;
         z-index: 1;
     }
@@ -30,6 +30,7 @@
     .borderdetails {
         border: none;
         width: 100%;
+        margin: auto;
     }
     .bigscreen {
         display: flex;
@@ -48,5 +49,6 @@
         font-size: 3em;
         border-inline: none;
         background-color: black;
+        margin: 0px 5px;
     }
 }

@@ -1,0 +1,26 @@
+<section class="login-page">
+    <% if (title) { %>
+    <h1 class="regtitle"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+    <% } %>
+
+    <form action="/inv/addclassification" method="post" id="addclassificationform">
+        <label for="add_classificationname"> classification Name</label>
+        <p>Name Must be Alphabetic characters only</p>
+        <input type="text" name="add_classificationname" id="add_classificationname" placeholder=" " pattern="[A-Za-z]{2,15}" required value="<%= locals.add_classificationname %>">
+      
+        <button type="submit"  class="buttonclassification" form="addclassificationform" value="register">Add New Classification</button>
+    </form>
+
+</section>

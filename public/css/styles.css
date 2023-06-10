@@ -7,6 +7,7 @@
   box-sizing: border-box;
   /*-webkit-box-sizing:border-box;*/
 }
+html { visibility:hidden; }
 body {
   margin:0;
   padding:0;
@@ -17,13 +18,23 @@ body {
 }
 #top-header {
   display: flex;
-  justify-content: space-between;
-  margin: 0 5px;
+  width: 75%;
+  height: 5em;
+  background: black;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  border: 5px solid white;
 
 }
 #top-header a {
   text-decoration: none;
   text-decoration-skip-ink:auto;
+  background: black;
+  color: white;
+}
+.index-page{
+  margin-top: 5.45em;
 }
 .siteName{
   font-size: xx-large;
@@ -31,7 +42,98 @@ body {
 #tools{
   font-size: large;
 }
-nav {
+
+.navbar{
+    display: flex;
+}
+
+.menu-btn {
+  display: flex;
+  position: fixed;
+  width: -webkit-fill-available;
+  background: white;
+  z-index: 50;
+  margin-top: -5.5em;
+  padding-bottom: 8px;
+}
+
+/* .menu-btn:hover {
+  opacity: 0.5;
+} */
+
+.navbar ul.nav-menu {
+  position: absolute;
+  top: 0%;
+  right: 49%;
+  bottom: -50em;
+  background: black;
+  left: 0%;
+  border: 5px solid red;
+  opacity: 0.97;
+  transform: translateX(-500px);
+  transition: transform 0.5s ease-in-out;
+}
+
+.navbar ul.nav-menu li {
+  padding: 20px;
+  border-bottom: #ccc solid 1px;
+  font-size: x-large;
+  width: -webkit-fill-available;
+  background: black;
+  text-align: center;
+}
+.navbar ul.nav-menu li a{
+  text-decoration: none;
+  color: white;
+}
+.navbar ul.nav-menu li:last-child {
+  border-bottom: 0;
+}
+
+.navbar ul.nav-menu.show {
+  transform: translateX(-20px);
+}
+
+.navbar ul.nav-menu-right {
+  margin-right: 50px;
+}
+.andale{
+  background-color: #000000;
+}
+
+.andale span {
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  right: -80px;
+  transform: translate(-100px);
+  transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+  z-index: 2;
+  background: white;
+}
+.andale span:nth-child(2) {
+  z-index: 1;
+  transform: translatex(-98px);
+  top: 18px;
+  right: -70px;
+  display: none;
+}
+.andale span:nth-child(2).blck {
+  display: block;
+}
+
+.andale span.show{
+  transform: translate(100px)rotate(167deg);
+}
+.fa-xmark-large:before {
+  content: "\2716";
+  color: black;
+  font-size: x-large;
+  font-weight: bolder;
+  text-shadow: 3px 2px 8px #181010;
+}
+/* nav {
   background: black;
   color: white;
   margin: 0 5px;
@@ -50,7 +152,7 @@ nav ul li {
 nav ul li a {
   text-decoration: none;
   color: white;
-}
+} */
 #messages{
   color: red;
   font-size: x-large;
@@ -93,12 +195,49 @@ nav ul li a {
 
 .login-page, .register-page{
   border: 5px solid black;
-    display: flex;
-    flex-direction: column;
-    background-color: aqua;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  background-color: aqua;
+  align-items: center;
+  margin-top: 5.5em;
 }
 .regtitle{
+  margin: 1em;
+}
+.managetitle{
+  font-size: 2em;
+}
+.linksmanagement {
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 1.5em;
+}
+.anchorsmanagement {
+  margin: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.anchorsmanagement:hover {
+  --p: 100%;
+  color: #000000;
+  font-weight: bold;
+}
+.buttonclassification{
+  margin: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  width: -webkit-fill-available;
+}
+#addclassificationform{
+  width: -webkit-fill-available;
   margin: 1em;
 }
 form {
@@ -117,6 +256,13 @@ form p {
 form input {
   margin-bottom: 10px;
   border-radius: 5px;
+}
+#classificationcars option {
+  background-color: black;
+  color: white;
+}
+#nonedisplay{
+  display: none;
 }
 /* Hide the default checkbox */
 .custom-checkbox {
@@ -196,6 +342,7 @@ input:not(:focus):not(:placeholder-shown):valid {
 .borderdetails{
   border: 2px solid black;
   max-width: -webkit-fill-available;
+  margin-top: 5.5em;
 }
 .details{
   margin-bottom: 20px;
@@ -266,6 +413,7 @@ input:not(:focus):not(:placeholder-shown):valid {
   border: 5px solid;
   background-color: black;
   margin: 0px;
+  padding: 5px;
 }
 .namePrice a{
   color: white;
@@ -343,24 +491,60 @@ input:not(:focus):not(:placeholder-shown):valid {
   #tools {
     font-size: x-large;
   }
-  nav ul {
-    justify-content: space-around;
+  #top-header {
+    display: flex;
+    background: black;
+    padding: 5px;
+    border: 5px solid white;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: -webkit-fill-available;
+    height: auto;
+}
+  .menu-btn {
+    display: contents;
   }
-  nav ul li {
-    padding: 10px;
-    border-radius: 5px;
+  .andale {
+    display: none;
   }
-  nav ul li:hover{
+  .navbar ul.nav-menu {
+    display: flex;
+    position: unset;
+    border: unset;
+    opacity: unset;
+    transform: unset;
+    transition: unset;
+    justify-content: space-evenly;
+    width: -webkit-fill-available;
+    margin: 0px 5px;
+  }
+  .navbar ul.nav-menu li {
+    padding: 20px;
+    font-size: x-large;
+    background: black;
+    list-style: none;
+    border-bottom: unset;
+    cursor: pointer;
+  }
+  .navbar ul.nav-menu.show {
+    transform: none;
+  }
+ 
+  .navbar ul.nav-menu li:hover{
     background-color: white;
     padding: 15px;
+    color: black;
   }
-  nav ul li a {
-    padding: 1em;
+  .navbar ul.nav-menu li a {
     text-decoration: none;
     color: white;
     font-size: large;
   }
-  nav ul li a:hover{
+  .navbar ul.nav-menu li:last-child {
+    border-bottom: none;
+  }
+  .navbar ul.nav-menu li a:hover{
     color: black;
     padding: 2em;
     font-size: x-large;
@@ -436,9 +620,34 @@ input:not(:focus):not(:placeholder-shown):valid {
     margin: 1em 11rem 1em 11rem;
     max-width: 39em;
   }
+  .managetitle{
+    font-size: 3.5em;
+  }
+  .linksmanagement {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    font-size: 2em;
+    text-transform: uppercase;
+  }
+  .anchorsmanagement {
+    background: linear-gradient(#ffffff 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+    transition: .4s, background-position 0s;
+    background-color: black;
+  }
+  .anchorsmanagement:hover {
+    --p: 100%;
+    color: #000000;
+    font-weight: bold;
+  }
   form p{
     font-size: medium;
     margin: 20px 20px;
+  }
+  .buttonclassification{
+    background: linear-gradient(#ffffff 0 0) var(--p, 0) / var(--p, 0) no-repeat;
+    transition: .4s, background-position 0s;
+    background-color: black;
   }
   .signup {
     margin-top: 1em;

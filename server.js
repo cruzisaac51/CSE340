@@ -67,6 +67,8 @@ app.use("/inv", require("./routes/inventoryRoute"))
 //register route
 app.use("/account", require("./routes/accountRoute"))
 
+//app.use("/management", require("./routes/vehiclemanageRoute"))
+
 
 //footer link error
 app.get('/error-link', utilities.intentionalerror);
