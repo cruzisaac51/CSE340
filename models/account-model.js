@@ -14,6 +14,17 @@ const accModel = {}
             return error.message
         }
     }
+    accModel.infoUserAcount = async (account_email) =>{
+        try {
+            const datainfouser = await pool.query(
+                "SELECT  *  FROM public.account WHERE account_email = $1",
+                [account_email]
+            )
+            return datainfouser.rows
+        } catch (error) {
+            return error.message
+        }
+    }
 
 
 /* *****************************
@@ -47,15 +58,12 @@ const accModel = {}
         try {
             const sql1 = "SELECT * FROM account WHERE account_password = $1"
             const password = await pool.query(sql1, [account_password])
-            return password.rowCount
+            return password
         } catch (error) {
             return error.message
         }
     }
 
-    // accModel.getaccount = async () => {
-    //     return await pool.query("SELECT * FROM public.account ORDER BY account_id")
-    // }
 
     
 module.exports = accModel

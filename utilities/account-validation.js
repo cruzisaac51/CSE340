@@ -1,5 +1,6 @@
 const utilities = require(".")
 const accountModel = require("../models/account-model")
+const bcrypt = require("bcryptjs")
 var validator = require('validator');
 const { body, validationResult, check, oneOf} = require("express-validator")
 
@@ -24,12 +25,15 @@ const validate = {}
             body("account_password")
             .exists()
             .withMessage("invalid username/passwordp.")
-            .custom(async (account_password) => {
+            .custom(async (account_password,{req}) => {
                 const passwordExists = await accountModel.checkExistingPassword(account_password)
-                if (!passwordExists) {
-                    console.log("mybeis34er", passwordExists)
-                    throw new Error("invalid username/passwordp")
-                }
+                passwordExists.rows.forEach(async row => {
+                    let hashedPassword = await bcrypt.compare(row.account_password, bcrypt.hash)
+                    if (!hashedPassword) {
+                        console.log("mybeis34er", passwordExists)
+                        throw new Error("invalid username/passwordp")
+                    }
+                });
             }),
         ]
     }

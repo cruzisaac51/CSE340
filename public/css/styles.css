@@ -484,6 +484,9 @@ input:not(:focus):not(:placeholder-shown):valid {
   .index-page{
     display: flex;
     flex-direction: column;
+    width: -webkit-fill-available;
+    margin-left: 1em;
+    margin-right: 1em;
   }
   .siteName{
     font-size: 3.5em;
@@ -551,7 +554,7 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .hero {
     background-image: url(../images/vehicles/delorean.jpg);
-    height: 350px;
+    height: 24vmax;
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
@@ -568,10 +571,10 @@ input:not(:focus):not(:placeholder-shown):valid {
     margin-left: 100px;
   }
   .action h2 {
-    font-size: xxx-large;
+    font-size: 5vmax;
   }
   .action ul li {
-    font-size: x-large;
+    font-size: 2vmax;
   }
   .bigscreen{
     display: flex;
@@ -595,6 +598,8 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .inv-displayli img {
     width: 27vmax;
+    height: 14vmax;
+    margin-top: 15px;
   }
   .image-display {
     margin: 0px;

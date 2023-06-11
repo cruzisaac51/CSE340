@@ -45,8 +45,23 @@ class LoginBuild {
         let nav = await utilities.getNav();
         const { account_email, account_password } = req.body;
         const regResult = await accountModel.loginUserAcount(account_email,account_password)
+        let hashedPassword
+        try {
+            // regular password and cost (salt is generated automatically)
+            hashedPassword = await bcrypt.hashSync(account_password, 10)
+        } catch (error) {
+            req.flash("notice", "Sorry, the registration failed.")
+            return res.status(401).render("./account/login", {
+                title: "Sign in",
+                nav,
+                errors: null,
+            })
+        }
         if (regResult) {
-            req.flash("notice", "Welcome");
+            const nameuser = await accountModel.infoUserAcount(account_email);
+            const account_firstname = nameuser[0].account_firstname;
+            //console.log("arrayobjetorwhat?",nameuser, account_firstname)
+            req.flash("notice", `Welcome ${account_firstname}`);
             return res.status(201).render("./", {
             title: "Home",
             nav,
