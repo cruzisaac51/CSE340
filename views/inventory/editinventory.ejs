@@ -1,0 +1,38 @@
+<section class="login-page">
+    <% if (title) { %>
+    <h1 class="regtitle"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <%- messages() %>
+
+
+    <form action="/inv/Upadate" method="post" id="editinventoryform">
+        <label for="classificationcars"> Classification</label>
+        <select id="classificationcars" name="classificationcars">
+        <option value="<%- classification_id  %>" disabled selected id="nonedisplay">&#10003; <%- classification_name %></option>
+        <%- grid %>
+        </select>
+        <label for="edit_makename"> Make</label>
+        <input type="text" name="edit_makename" id="edit_makename" placeholder="" pattern="[A-Za-z]{2,15}" required value="<%- inv_make %><%= locals.edit_makename %>">
+        <label for="edit_modelname"> Model</label>
+        <input type="text" name="edit_modelname" id="edit_modelname" placeholder=" Min 3 characters" pattern="[A-Za-z]{2,15}" required value="<%- inv_model %><%= locals.edit_modelname %>">
+        <label for="edit_description"> Description</label>
+        <textarea name="edit_description" rows="5" cols="35" id="edit_description" placeholder="Edit description"><%- inv_description  %></textarea>
+        <label for="edit_imagepath"> Image path</label>
+        <input type="text" name="edit_imagepath" id="edit_imagepath" placeholder="" required value="<%- inv_image  %><%= locals.edit_imagepath  %>">
+        <label for="edit_thumbnailpath"> Thumbnail path</label>
+        <input type="text" name="edit_thumbnailpath" id="edit_thumbnailpath" placeholder="" required value="<%- inv_thumbnail %><%= locals.edit_thumbnailpath  %>">
+        <label for="add_price"> Price </label>
+        <input type="number" name="add_price" id="add_price" placeholder="integer" required value="<%- inv_price %><%= locals.edit_price %>">
+        <label for="edit_year"> Year </label>
+        <input type="number" name="edit_year" id="edit_year" placeholder=" 4-Digit year " required value="<%- inv_year %><%= locals.edit_year %>">
+        <label for="edit_miles"> Miles</label>
+        <input type="number" name="edit_miles" id="edit_miles" placeholder="Digits only " required value="<%- inv_miles %><%= locals.edit_miles %>">
+        <label for="edit_color"> Color </label>
+        <input type="text" name="edit_color" id="edit_color" placeholder=" " pattern="[A-Za-z]{3,20}" required value="<%- inv_color %><%= locals.edit_color %>">
+        <button type="submit" form="editinventoryform" value="Upadate"> Update Vehicle </button>
+    </form>
+
+</section>

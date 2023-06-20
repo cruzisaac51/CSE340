@@ -3,6 +3,8 @@ const utilities = require("../utilities/")
 const bcrypt = require("bcryptjs")
 const accountModel = require("../models/account-model");
 const { body } = require("express-validator")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 
 
@@ -37,6 +39,19 @@ class LoginBuild {
         });
     }
 
+     /* ***************************
+    *  Build user account view.
+    * ************************** */
+     async builduseraccountview(req, res, next){
+        let nav = await utilities.getNav()
+        const grid = await utilities.builduseracountGrid()
+        res.render("./account/userportal", {
+        title: 'Acount management',
+        nav,
+        grid,
+        })
+    }
+
     /* ***************************
     *  check login view.
     * ************************** */
@@ -44,30 +59,9 @@ class LoginBuild {
     async loginuserAccount(req, res) {
         let nav = await utilities.getNav();
         const { account_email, account_password } = req.body;
-        const regResult = await accountModel.loginUserAcount(account_email,account_password)
-        let hashedPassword
-        try {
-            // regular password and cost (salt is generated automatically)
-            hashedPassword = await bcrypt.hashSync(account_password, 10)
-        } catch (error) {
-            req.flash("notice", "Sorry, the registration failed.")
-            return res.status(401).render("./account/login", {
-                title: "Sign in",
-                nav,
-                errors: null,
-            })
-        }
-        if (regResult) {
-            const nameuser = await accountModel.infoUserAcount(account_email);
-            const account_firstname = nameuser[0].account_firstname;
-            //console.log("arrayobjetorwhat?",nameuser, account_firstname)
-            req.flash("notice", `Welcome ${account_firstname}`);
-            return res.status(201).render("./", {
-            title: "Home",
-            nav,
-            });
-        } else {
-            req.flash("notice", "Sorry, the registration failed.")
+        const regResult = await accountModel.checkExistingEmail(account_email)
+        if (!regResult) {
+            req.flash("notice", "invalid username/password.")
             console.log("email??error");
             return res.status(401).render("./account/login", {
                 title: "Sign in",
@@ -75,6 +69,20 @@ class LoginBuild {
                 errors: null,
             })
         }
+        try {
+            if (await bcrypt.compare(account_password, regResult.account_password)) {
+                delete regResult.account_password
+                const accessToken = jwt.sign(regResult , process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+                res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+                const nameuser = await accountModel.infoUserAcount(account_email);
+                const account_firstname = nameuser[0].account_firstname;
+                req.flash("notice", `Welcome ${account_firstname}`);
+                return res.redirect("/account/");
+            }
+        } catch (error) {
+            return new Error('Access Forbidden');
+        }
+        
     }
         
 

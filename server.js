@@ -15,6 +15,7 @@ const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
 
 
 
@@ -26,7 +27,7 @@ app.use(session({
     createTableIfMissing: true,
     pool,
   }),
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.ACCESS_TOKEN_SECRET,
   resave: true,
   saveUninitialized: true,
   name: 'sessionId',
@@ -42,7 +43,16 @@ app.use(function(req, res, next){
 
 //process user registration
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-
+
+
+
+//cookies middleware
+app.use(cookieParser())
+
+
+// check if the token is used
+app.use(utilities.checkJWTToken)
 
 
 /* *************************

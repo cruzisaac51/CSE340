@@ -1,6 +1,4 @@
-window.addEventListener('load', function () {
-    document.getElementsByTagName("html")[0].style.visibility = "visible";
-});
+
 
 const showPass = document.querySelector("#showPass");
 if (document.getElementById("account_password")) {
@@ -35,8 +33,7 @@ function checkUrl() {
         document.head.appendChild(link);
     }
 }
-
-checkUrl();
+    checkUrl();
 
 
 document.querySelector(".menu-btn").addEventListener("click", () => {
@@ -47,3 +44,7 @@ document.querySelector(".andale").addEventListener("click", () => {
     document.querySelector("span").classList.toggle("show");
     document.querySelector("span:nth-child(2)").classList.toggle("blck");
 });
+
+// if (document.cookie) {
+//     document.querySelector("#tools").innerHTML = 
+// }

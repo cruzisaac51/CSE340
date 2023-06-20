@@ -9,23 +9,27 @@
 
 
     <form action="/inv/addinventory" method="post" id="addinventoryform">
+        <label for="classificationcars"> Classification</label>
+        <select id="classificationcars" name="classificationcars">
+        <option value="" disabled selected id="nonedisplay">&#10003; Choose a classification:</option>
         <%- grid %>
+        </select>
         <label for="add_makename"> Make</label>
         <input type="text" name="add_makename" id="add_makename" placeholder=" Min 3 characters " pattern="[A-Za-z]{2,15}" required value="<%= locals.add_makename %>">
         <label for="add_modelname"> Model</label>
         <input type="text" name="add_modelname" id="add_modelname" placeholder=" Min 3 characters" pattern="[A-Za-z]{2,15}" required value="<%= locals.add_modelname %>">
-        <h3> Description</h3>
+        <label for="add_description"> Description</label>
         <textarea name="add_description" rows="5" cols="35" id="add_description" placeholder="Add a description for the new car."></textarea>
         <label for="add_imagepath"> Image path</label>
-        <input type="text" name="add_imagepath" id="add_imagepath" placeholder="This function is coming soon" disable pattern="[A-Za-z]{2,15}" required value disabled>
+        <input type="text" name="add_imagepath" id="add_imagepath" placeholder="This function is coming soon" pattern="[A-Za-z]{2,15}" required value disabled>
         <label for="add_thumbnailpath"> Thumbnail path</label>
         <input type="text" name="add_thumbnailpath" id="add_thumbnailpath" placeholder="This function is coming soon" pattern="[A-Za-z]{2,15}" required value disabled>
         <label for="add_price"> Price </label>
-        <input type="number" name="add_price" id="add_price" placeholder=" Decimal or integer" pattern="\d+(\.\d{2})?" required value="<%= locals.add_price %>">
+        <input type="number" name="add_price" id="add_price" placeholder="Integer only" required value="<%= locals.add_price %>">
         <label for="add_year"> Year </label>
-        <input type="number" name="add_year" id="add_year" placeholder=" 4-Digit year " pattern="\d{2,4}" required value="<%= locals.add_year %>">
+        <input type="number" name="add_year" id="add_year" placeholder=" 4-Digit year " required value="<%= locals.add_year %>">
         <label for="add_miles"> Miles</label>
-        <input type="number" name="add_miles" id="add_miles" placeholder="Digits only " pattern="[0-9]{3,16}" required value="<%= locals.add_miles %>">
+        <input type="number" name="add_miles" id="add_miles" placeholder="Digits only " required value="<%= locals.add_miles %>">
         <label for="add_color"> Color </label>
         <input type="text" name="add_color" id="add_color" placeholder=" " pattern="[A-Za-z]{3,20}" required value="<%= locals.add_color %>">
         <button type="submit" form="addinventoryform" value="register">Add New Vehicle </button>

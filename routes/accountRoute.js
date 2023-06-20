@@ -14,6 +14,9 @@ router.get("/login/", utilities.handleErrors(logregbuild.buildLogin));
 // registration route
 router.get("/registration/", utilities.handleErrors(logregbuild.buildregistration));
 
+//acount management routes
+router.get("/", utilities.checkLogin, utilities.handleErrors(logregbuild.builduseraccountview))
+
 // server validation login route
 router.post("/login/", regValidate.loginRules(), regValidate.checkRegDatalogin, utilities.handleErrors(logregbuild.loginuserAccount))
 

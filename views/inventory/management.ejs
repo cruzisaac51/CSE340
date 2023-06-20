@@ -7,7 +7,22 @@
 
     <%- messages() %>
 
+    <div class="linksmanagement">
+        <a href="/inv/addclassification/" title="add clasification" class="anchorsmanagement">add new classification</a>
+        <a href="/inv/addinventory/" class="anchorsmanagement">add new inventory </a>
+    </div>
+    <h2>Manage Inventory</h2>
+    <p>choose a classification to see those inventory items</p>
 
-    <%- grid %>
+    <label for="classificationcars"> Classification</label>
+        <select id="classificationcars" name="classificationcars">
+        <option value="" disabled selected id="nonedisplay">&#10003; Choose a classification:</option>
+        <%- classificationSelect  %>
+        </select>
+    <table id="inventorydisplay"></table>
+    
+    <noscript>JavaScript must be enabled to use this page.</noscript>
+
+    
 
 </section>

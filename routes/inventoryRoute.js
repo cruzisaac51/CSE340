@@ -14,6 +14,8 @@ router.get("/details/:invId", utilities.handleErrors(invController.buildById));
 
 //provisional routes vehicle management routes
 router.get('/', utilities.handleErrors(vmanage.buildmanageview))
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
 router.get('/addclassification/', utilities.handleErrors(vmanage.buildaddclassview))
 router.get('/addinventory/', utilities.handleErrors(vmanage.buildaddvehicleview))
 router.post('/addclassification/',  managevalidate.addclassificationRules(), managevalidate.checkaddclassData, utilities.handleErrors(vmanage.registernewclassification))

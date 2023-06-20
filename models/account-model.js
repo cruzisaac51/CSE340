@@ -47,9 +47,11 @@ const accModel = {}
  * ********************* */
     accModel.checkExistingEmail = async (account_email) =>{
         try {
-            const sql = "SELECT * FROM account WHERE account_email = $1"
-            const email = await pool.query(sql, [account_email])
-            return email.rowCount
+            const sqlemail = await pool.query(
+                "SELECT * FROM account WHERE account_email = $1",
+                [account_email]
+            )
+            return sqlemail.rows[0]
         } catch (error) {
             return error.message
         }

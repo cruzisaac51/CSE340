@@ -126,7 +126,7 @@ const managevalidate = {}
     * Check data and return errors or continue to add New Vehicle
     * ***************************** */
     managevalidate.checkaddcarData = async (req, res, next) => {
-        const { classificationcars,add_makename,  add_modelname,add_description,add_imagepath,add_thumbnailpath,add_price,add_year,add_miles,add_color } = req.body;
+        const { classificationcars,add_makename,  add_modelname,add_description,add_price,add_year,add_miles,add_color } = req.body;
         let errors = []
         errors = validationResult(req)
         console.log("maybevalitaionhere",errors)
@@ -139,7 +139,14 @@ const managevalidate = {}
                 title: "New vehicle",
                 nav,
                 grid,
-                classificationcars,add_makename,  add_modelname,add_description,add_imagepath,add_thumbnailpath,add_price,add_year,add_miles,add_color,
+                classificationcars,
+                add_makename,  
+                add_modelname,
+                add_description,
+                add_price,
+                add_year,
+                add_miles,
+                add_color,
             })
             return
         }

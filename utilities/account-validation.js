@@ -1,6 +1,8 @@
 const utilities = require(".")
 const accountModel = require("../models/account-model")
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 var validator = require('validator');
 const { body, validationResult, check, oneOf} = require("express-validator")
 
@@ -31,7 +33,7 @@ const validate = {}
                     let hashedPassword = await bcrypt.compare(row.account_password, bcrypt.hash)
                     if (!hashedPassword) {
                         console.log("mybeis34er", passwordExists)
-                        throw new Error("invalid username/passwordp")
+                        throw new Error("Access Forbiddddden")
                     }
                 });
             }),

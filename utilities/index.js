@@ -1,4 +1,9 @@
 const invModel = require("../models/inventory-model");
+const accountModel = require("../models/account-model");
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
+
+
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
@@ -131,28 +136,32 @@ const Util = {}
         return ''
     }
   }
-  Util.buildmanagementGrid = async()=>{
+
+  /* **************************************
+    * Build the user account view HTML
+  //   * ************************************ */
+  Util.builduseracountGrid = async()=>{
+
     let grid = []
+    grid += `<h3>You're logged in.</h3>`
     grid +=`<div class="linksmanagement">`
-    grid +=`<a href="/inv/addclassification/" title="add clasification" class="anchorsmanagement">add new classification</a>`
-    grid +=`<a href="/inv/addinventory/" class="anchorsmanagement">add new inventory </a>`
+    grid +=`<a href="/inv/addclassification/" title="edit acount information" class="anchorsmanagement">Edit acount information</a>`
     grid +=`</div>`
 
     return grid
   }
 
+
+    /* **************************************
+    * Build the add inventory view HTML
+    ************************************* */
   Util.buildaddnewcarform = async(req, res, next)=>{
     try {
       let data = await invModel.getClassifications();
       let grid = []
-      grid += ` <label for="classificationcars"> Classification</label>
-          <select id="classificationcars" name="classificationcars">`
-      grid += ` <option value="" disabled selected id="nonedisplay">&#10003; Choose a classification:</option>`
       for (let row of data.rows) {
         grid += `<option value="${row.classification_id}">${row.classification_name}</option>`;
-      }       
-          grid += `</select>`
-
+      }
         return grid
     } catch (error) {
       console.log("is here the errorr?---", error);
@@ -172,6 +181,41 @@ const Util = {}
       throw new Error('Intentional error');
     } catch (error) {
       next(error);
+    }
+  }
+
+  /* ****************************************
+* Middleware to check token validity
+**************************************** */
+  Util.checkJWTToken = (req, res, next) => {
+    if (req.cookies.jwt) {
+    jwt.verify(
+      req.cookies.jwt,
+      process.env.ACCESS_TOKEN_SECRET,
+      function (err, regResult) {
+      if (err) {
+        req.flash("Please log in")
+        res.clearCookie("jwt")
+        return res.redirect("./account/login")
+      }
+      res.locals.regResult = regResult
+      res.locals.loggedin = 1
+      next()
+      })
+    } else {
+    next()
+    }
+  }
+
+  /* ****************************************
+ *  Check Login
+ * ************************************ */
+  Util.checkLogin = (req, res, next) => {
+    if (res.locals.loggedin) {
+      next()
+    } else {
+      req.flash("notice", "Please log in.")
+      return res.redirect("/account/login")
     }
   }
 

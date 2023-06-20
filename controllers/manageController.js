@@ -6,12 +6,12 @@ const manageCont = {}
 
     manageCont.buildmanageview  = async(req, res, next) =>{
         let nav = await utilities.getNav()
-        const grid = await utilities.buildmanagementGrid()
+        const classificationSelect = await utilities.buildaddnewcarform()
         res.render("./inventory/management", {
         title: 'vehicle management',
         nav,
-        grid,
         errors: null,
+        classificationSelect,
         })
     }
 
