@@ -153,4 +153,110 @@ const managevalidate = {}
         next()
     }
 
+
+
+
+
+
+        /*  **********************************
+    *  Edit car Data Validation Rules
+    * ********************************* */
+    //const data = await invModel.getClassifications();
+    managevalidate.newInventoryRules = () => {
+        return [
+            body("classificationcars")
+            .notEmpty()
+            .isString()
+            .withMessage("Please choose a classification."),
+
+            body("edit_makename")
+                .trim()
+                .isLength({ min: 2 })
+                .withMessage("Please provide a Make name."),
+
+            body("edit_modelname")
+                .trim()
+                .isLength({ min: 2 })
+                .withMessage("Please provide a Model name."),
+
+            body("edit_description")
+                .notEmpty()
+                .trim()
+                .isString()
+                .isLength({ min: 2 })
+                .withMessage("Please provide a description."),
+
+           body("edit_imagepath")
+                .trim()
+                .isString()
+                .notEmpty()
+                .withMessage("insert valid path"),
+
+            body("edit_thumbnailpath")
+                .trim()
+                .isString() 
+                .notEmpty()
+                .withMessage("insert valid path"),
+
+            body("edit_price")
+                .trim()
+                .isInt()
+                .withMessage("Please provide a price."),
+
+            body("edit_year")
+                .trim()
+                .isInt()
+                .withMessage("Please provide a 4 digits Year."),
+
+            body("edit_miles")
+                .trim()
+                .isInt()
+                .withMessage("Please provide just numbers."),
+
+            body("edit_color")
+                .trim()
+                .isString()
+                .isLength({ min: 2 })
+                .withMessage("Please provide a Color"),
+        ]
+        
+    }
+
+     /* ******************************
+    * Check data and return errors or continue to edit Vehicle
+    * ***************************** */
+     managevalidate.checkUpdateData = async (req, res, next) => {
+        const {classificationcars, edit_makename,  edit_modelname, edit_description, edit_imagepath, edit_thumbnailpath, edit_price, edit_year, edit_miles, edit_color, inv_id } = req.body;
+        let errors = []
+        errors = validationResult(req)
+        console.log("maybevalitaionhere",errors)
+        if (!errors.isEmpty()) {
+            console.log("maybevalitaionhere",errors[0])
+            const grid = await utilities.buildaddnewcarform()
+            let nav = await utilities.getNav()
+            const itemData = await invModel.getVehicleById(inv_id)
+            const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
+            res.render("./inventory/editinventory", {
+                errors,
+                title: "Edit " + itemName,
+                nav,
+                grid,
+                classification_name: itemData[0].classification_name,
+                inv_make:edit_makename,  
+                inv_model:edit_modelname,
+                inv_description:edit_description,
+                inv_image:edit_imagepath,
+                inv_thumbnail:edit_thumbnailpath,
+                inv_price:edit_price,
+                inv_year:edit_year,
+                inv_miles:edit_miles,
+                inv_color:edit_color,
+                classification_id: classificationcars,
+                inv_id,
+            })
+            return
+        }
+        next()
+    }
+
 module.exports = managevalidate

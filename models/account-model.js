@@ -14,18 +14,6 @@ const accModel = {}
             return error.message
         }
     }
-    accModel.infoUserAcount = async (account_email) =>{
-        try {
-            const datainfouser = await pool.query(
-                "SELECT  *  FROM public.account WHERE account_email = $1",
-                [account_email]
-            )
-            return datainfouser.rows
-        } catch (error) {
-            return error.message
-        }
-    }
-
 
 /* *****************************
 *   Register new account
@@ -41,6 +29,7 @@ const accModel = {}
         return error.message
         }
     }
+
 
     /* **********************
  *   Check for existing email
@@ -66,6 +55,69 @@ const accModel = {}
         }
     }
 
+
+    /* *****************************
+    *   Assignment 5
+    * *************************** */
+
+    /* *****************************
+    *   get account
+    * *************************** */
+
+    accModel.infoUserAcount = async (account_id) =>{
+        try {
+            const datainfouser = await pool.query(
+                "SELECT * FROM public.account WHERE account_id = $1",
+                [account_id]
+            )
+            console.log("queryinfouser",datainfouser)
+                return datainfouser.rows
+        } catch (error) {
+            return error.message
+        }
+    }
+    accModel.infoUserAcount1 = async () =>{
+        try {
+            const datainfouser = await pool.query(
+                "SELECT  *  FROM public.account ORDER BY account_id ASC"
+            )
+            return datainfouser.rows
+        } catch (error) {
+            return error.message
+        }
+    }
+
+    /* *****************************
+    *   Edit account
+    * *************************** */
+    accModel.editAccount = async (account_firstname, account_lastname, account_email, account_id) =>{
+        try {
+        const sql = await pool.query(
+            "UPDATE public.account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *",
+            [account_firstname, account_lastname, account_email, account_id]
+        )
+            return sql.rows[0]
+        } catch (error) {
+            console.error("model editaccount error: " + error)
+            return error.message
+        }
+    }
+
+    /* *****************************
+    *   Edit Password
+    * *************************** */
+    accModel.editpasswordAccount = async (account_password, account_id) =>{
+        try {
+        const sql = await pool.query(
+            "UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *",
+            [account_password, account_id]
+        )
+            return sql.rows[0]
+        } catch (error) {
+            console.error("model editpassword error: " + error)
+            return error.message
+        }
+    }
 
     
 module.exports = accModel

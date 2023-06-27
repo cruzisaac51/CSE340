@@ -1,0 +1,45 @@
+<section class="user-page">
+    <% if (title) { %>
+        <h1><%= title %></h1>
+    <% } else { %>
+        res.redirect('/')
+    <% } %>
+
+    <%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+    <% } %>
+
+
+    <form action="/account/update" method="post" id="edituserform">
+        <label for="edit_firstname"> First Name</label>
+        <input type="text" name="edit_firstname" id="edit_firstname" placeholder="" pattern="[A-Za-z]{2,15}" required value="<%- account_firstname %><%= locals.edit_firstname %>">
+        <label for="edit_lastname"> Last Name</label>
+        <input type="text" name="edit_lastname" id="edit_lastname" placeholder="" pattern="[A-Za-z]{2,15}" required value="<%- account_lastname  %><%= locals.edit_lastname %>">
+        <label for="edit_email"> Email Address</label>
+        <input type="email" name="edit_email" id="edit_email" placeholder="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,10}" required value="<%- account_email  %><%= locals.edit_email %>">
+        <button type="submit" form="edituserform" value="update"> Update Account</button>
+
+
+        <p>"Note: Your original password will be update"</p>
+        <label for="edit_password"> New Password </label>
+        <input type="password" name="edit_password" id="edit_password" class="checkaligne" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{12,}">
+        <label for="showPass1" class="inviciblelabel">checkbox</label>
+        <input type="checkbox" class="custom-checkbox" id="showPass1">
+        <p>Password must be at least 12 characters contain at least 1 capital letter, contain at least 1 number, contain at least 1 special character</p>
+        <button id="button2" type="submit" form="edituserform" value="updatepassword"> update Password </button>
+
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </form>
+
+
+
+
+</section>

@@ -42,7 +42,7 @@ const manageCont = {}
 
     manageCont.registernewclassification = async(req, res) => {
         let nav = await utilities.getNav();
-        const grid = await utilities.buildmanagementGrid();
+        const classificationSelect = await utilities.buildaddnewcarform()
         const { add_classificationname } = req.body;
         const regResult = await manageModel.registernewclassification(add_classificationname);
         if (regResult) {
@@ -54,7 +54,7 @@ const manageCont = {}
             return res.status(201).render("./inventory/management", {
                 title: 'vehicle management',
                 nav : `${newnav}`,
-                grid,
+                classificationSelect,
                 errors: null,
             })
         } else {
@@ -73,7 +73,6 @@ const manageCont = {}
 
      manageCont.registernewvehicle = async(req, res) => {
         let nav = await utilities.getNav();
-        const grid = await utilities.buildmanagementGrid()
         const grid1 = await utilities.buildaddnewcarform()
         const { classificationcars,add_makename,  add_modelname,add_description,add_price,add_year,add_miles,add_color } = req.body;
         const regResult = await manageModel.registernewvehicle(classificationcars,add_makename,  add_modelname,add_description,add_price,add_year,add_miles,add_color)
@@ -87,7 +86,7 @@ const manageCont = {}
             return res.status(201).render("./inventory/management", {
                 title: 'vehicle management',
                 nav,
-                grid,
+                classificationSelect: `${grid1}`,
                 errors: null,
             })
         } else {

@@ -10,12 +10,14 @@ const env = require("dotenv").config()
 const app = express()
 
 const expressLayouts = require("express-ejs-layouts")
+const LoginBuild = require("./controllers/accountController");
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const session = require("express-session")
 const pool = require('./database/')
 const bodyParser = require("body-parser")
 const cookieParser = require("cookie-parser")
+const logregbuild = new LoginBuild()
 
 
 
@@ -67,6 +69,13 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(require("./routes/static"))
+
+
+// username using jwt token
+app.get("*", utilities.handleErrors(logregbuild.requireAuth))
+
+//logut user
+app.get("/logout", utilities.handleErrors(logregbuild.logout))
 
 //Idex route with errorhandler
 app.get("/",  utilities.handleErrors(baseController.buildHome))

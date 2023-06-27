@@ -137,21 +137,6 @@ const Util = {}
     }
   }
 
-  /* **************************************
-    * Build the user account view HTML
-  //   * ************************************ */
-  Util.builduseracountGrid = async()=>{
-
-    let grid = []
-    grid += `<h3>You're logged in.</h3>`
-    grid +=`<div class="linksmanagement">`
-    grid +=`<a href="/inv/addclassification/" title="edit acount information" class="anchorsmanagement">Edit acount information</a>`
-    grid +=`</div>`
-
-    return grid
-  }
-
-
     /* **************************************
     * Build the add inventory view HTML
     ************************************* */
@@ -217,6 +202,7 @@ const Util = {}
       req.flash("notice", "Please log in.")
       return res.redirect("/account/login")
     }
+
   }
 
 

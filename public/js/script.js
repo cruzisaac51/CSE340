@@ -12,6 +12,18 @@ if (document.getElementById("account_password")) {
     });
 }
 
+const showPass1 = document.querySelector("#showPass1");
+if (document.getElementById("edit_password")) {
+    showPass1.addEventListener("click", () => {
+    const password = document.getElementById("edit_password");
+    if (password.type === "password") {
+        password.type = "text";
+    } else {
+        password.type = "password";
+    }
+    });
+}
+
 
 function checkUrl() {
     const url = window.location.href;

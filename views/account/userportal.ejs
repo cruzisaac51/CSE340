@@ -1,11 +1,40 @@
 <section class="user-page">
     <% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
+        <h1><%= title %></h1>
+    <% } else { %>
         res.redirect('/')
-    } %>
-<%- messages() %>
+    <% } %>
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+    <% } %>
+
+    <% if (user) { %>
+        <h2>
+            Welcome <%= user %>
+        </h2>
+    <% } %>
+
+    <h3>You're logged in.</h3>
+    <div class="linksmanagementuserportal">
+        <a href="/account/edit/<%- accountid %>" title="edit acount information" class="anchorsmanagement">Edit acount information</a>
+    </div>
 
 
-<%- grid  %>
+    <% if (type == "Admin" || type == "Employee") { %>
+        <div class="userinventoryaccess">
+            <h3>Inventory Management</h3>
+            <a href="/inv/" title="Inventory management"   class="anchorsmanagement">inventory management</a> 
+        </div> 
+    <% } %>
+
+    <% if (type == "Client") {%> 
+        <br>
+    <% } %>
+
+
 </section>

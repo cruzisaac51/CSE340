@@ -1,0 +1,37 @@
+<section class="login-page">
+    <% if (title) { %>
+    <h1 class="regtitle"><%= title %></h1>
+    <% } else {
+        res.redirect('/')
+    } %>
+
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+    <% } %>
+
+
+    <form action="/inv/delete" method="post" id="deleteinventoryform">
+        <p>Confirm Deletion - The delete is permanent.</p>
+        <label for="delete_makename"> Make</label>
+        <input type="text" name="delete_makename" id="delete_makename" placeholder="" pattern="[A-Za-z]{2,15}" readonly value="<%- inv_make %>">
+        <label for="delete_modelname"> Model</label>
+        <input type="text" name="delete_modelname" id=delete_modelname" placeholder=" Min 3 characters" pattern="[A-Za-z]{2,15}" readonly value="<%- inv_model %>">
+        <label for="delete_price"> Price </label>
+        <input type="number" name="delete_price" id="delete_price" placeholder="integer" readonly value="<%- inv_price %>">
+        <label for="delete_year"> Year </label>
+        <input type="number" name="delete_year" id="delete_year" placeholder=" 4-Digit year " readonly value="<%- inv_year %>">
+        <label for="delete_miles"> Miles</label>
+        <input type="number" name="delete_miles" id="delete_miles" placeholder="Digits only " readonly value="<%- inv_miles %>">
+        <button type="submit" form="deleteinventoryform"  value="Delete"> Delete Vehicle </button>
+
+        <input type="hidden" name="inv_id"
+        <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+        <% } %>>
+    </form>
+
+</section>

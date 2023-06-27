@@ -133,26 +133,7 @@ body {
   font-weight: bolder;
   text-shadow: 3px 2px 8px #181010;
 }
-/* nav {
-  background: black;
-  color: white;
-  margin: 0 5px;
-}
-nav ul {
-  display: flex;
-  justify-content: space-between;
-  list-style: none;
-  padding: 10px 3px;
-  margin: 10px;
-}
-nav ul li {
-  padding: 5px;
-  border-radius: 5px;
-}
-nav ul li a {
-  text-decoration: none;
-  color: white;
-} */
+
 #messages{
   color: red;
   font-size: x-large;
@@ -193,7 +174,7 @@ nav ul li a {
   height: 2em;
 }
 
-.login-page, .register-page{
+.login-page, .register-page, .user-page{
   border: 5px solid black;
   display: flex;
   flex-direction: column;
@@ -211,6 +192,33 @@ nav ul li a {
   display: grid;
   grid-template-columns: 1fr;
   font-size: 1.5em;
+}
+.linksmanagementuserportal {
+  display: grid;
+  grid-template-columns: 1fr;
+  font-size: 1.5em;
+}
+#top-header #logout {
+  padding: 3px;
+  border-radius: 3px;
+  border: 1px solid white;
+  margin: 5px;
+}
+#top-header #logout:hover {
+  margin: 7px;
+}
+.linksclassification{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 15px;
+}
+.userinventoryaccess, .userinventoryaccess h3 {
+  margin: 15px;
+  text-align: center;
+}
+#inventorydisplay {
+  margin: 10px;
 }
 .anchorsmanagement {
   margin: 15px;
@@ -632,6 +640,13 @@ input:not(:focus):not(:placeholder-shown):valid {
   .linksmanagement {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    gap: 1em;
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+  .linksmanagementuserportal {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 1em;
     font-size: 1.5em;
     text-transform: uppercase;
