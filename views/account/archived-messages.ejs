@@ -1,0 +1,38 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <%  }) %>
+   </ul>
+<% } %>
+
+<a href="/account/messages/<%- accountid %>">Return to Inbox</a>
+
+<table id="messageDisplay" class="messageDisplay">
+    <thead>
+        <tr>
+            <th>Received</th>
+            <th>Subject</th>
+            <th>From</th>
+            <th>Read</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% locals.messagesArray.forEach(function (message) { %>
+            <tr>
+                <td><%= message.message_created.toLocaleString('en-US', 'narrow')%></td>
+                <td><a href='/account/view-message/<%= message.message_id %>'><%= message.message_subject %></a></td>
+                <td><%= message.message_from_firstname %> <%= message.message_from_lastname %></td>
+                <td><%= message.message_read %></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

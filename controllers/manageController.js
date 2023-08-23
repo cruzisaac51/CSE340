@@ -59,7 +59,7 @@ const manageCont = {}
             })
         } else {
             req.flash("notice", "Sorry, the registration failed.")
-            return res.status(401).render("./inventory/addclassification", {
+            return res.status(501).render("./inventory/addclassification", {
                 title: 'vehicle new classification',
                 nav,
                 errors: null,

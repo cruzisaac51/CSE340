@@ -70,8 +70,8 @@ const accModel = {}
                 "SELECT * FROM public.account WHERE account_id = $1",
                 [account_id]
             )
-            console.log("queryinfouser",datainfouser)
-                return datainfouser.rows
+            //console.log("queryinfouser",datainfouser)
+                return datainfouser
         } catch (error) {
             return error.message
         }
@@ -119,5 +119,107 @@ const accModel = {}
         }
     }
 
+    /* *****************************
+    *   Add new message
+    * *************************** */
+    accModel.newMessage= async(message_to, message_subject, message_body, message_from) =>{
+        try {
+            const sql = "INSERT INTO message (message_subject, message_body, message_to, message_from) VALUES ($1, $2, $3, $4) RETURNING *"
+            return await pool.query(sql, [message_subject, message_body, message_to, message_from])
+        } catch (error) {
+            return error.message
+        }
+    }
+    
+    /* *****************************
+    * Return messages not read using messages_to
+    * ***************************** */
+    accModel.getUnreadMessages =async (message_to) => {
+        try {
+        const result = await pool.query(
+            'SELECT message_id, message_subject, message_body, message_created, message_to, message_from, message_read, message_archived FROM message WHERE message_to = $1 AND message_read = false',
+            [message_to])
+        return result.rows
+        } catch (error) {
+        return new Error("No message found")
+        }
+    }
+    
+    /* *****************************
+    * Return messageusing messages_id
+    * ***************************** */
+    accModel.getMessage = async (message_id) => {
+        try {
+        const result = await pool.query(
+            'SELECT message_id, message_subject, message_body, message_created, message_to, message_from, message_read, message_archived FROM message WHERE message_id = $1',
+            [message_id])
+        return result.rows[0]
+        } catch (error) {
+        return new Error("No message found")
+        }
+    }
+    /* *****************************
+    *   Update message as read
+    * *************************** */
+    accModel.updateMessageRead = async (message_id) =>{
+        try {
+            const sql = "UPDATE public.message SET message_read = true WHERE message_id = $1 RETURNING *"
+            const data = await pool.query(sql, [message_id])
+            return data.rows[0]
+        } catch (error) {
+        console.error("Update Error")
+        }
+    }
+    /* *****************************
+    *   Update message as archived
+    * *************************** */
+    accModel.updateMessageArchive = async(message_id) =>{
+        try {
+            const sql = "UPDATE public.message SET message_archived = true WHERE message_id = $1 RETURNING *"
+            const data = await pool.query(sql, [message_id])
+            return data.rows[0]
+        } catch (error) {
+        console.error("Update Error")
+        }
+    }
+    /* *****************************
+    *   Delete message
+    * *************************** */
+    accModel.deleteMessage = async (message_id) =>{
+        try {
+            const sql = "DELETE FROM public.message WHERE message_id = $1"
+            await pool.query(sql, [message_id])
+        } catch (error) {
+        console.error("Error Deleting Message")
+        }
+    }
+    /* *****************************
+    * Return archived messages using messages_to
+    * ***************************** */
+    accModel.getArchivedMessages = async (message_to) => {
+        try {
+        const result = await pool.query(
+            'SELECT m.*, a.account_firstname AS message_from_firstname, a.account_lastname AS message_from_lastname FROM public.message m LEFT JOIN public.account a ON m.message_from = a.account_id WHERE m.message_to IN ($1) AND m.message_archived = true ORDER BY m.message_created desc',
+            [message_to])
+        return result.rows
+        } catch (error) {
+        return new Error("No message found")
+        }
+    }
+    
+    /* *****************************
+    * Return messages and sender name using messages_to
+    * ***************************** */
+    accModel.getMessagesAndName = async (message_to) => {
+        try {
+        const result = await pool.query(
+            'SELECT m.*, a.account_firstname AS message_from_firstname, a.account_lastname AS message_from_lastname FROM public.message m LEFT JOIN public.account a ON m.message_from = a.account_id WHERE m.message_to IN ($1) AND m.message_archived = false ORDER BY m.message_created desc',
+            [message_to])
+        return result.rows
+        } catch (error) {
+        return new Error("No matching email found")
+        }
+    }
+  
     
 module.exports = accModel

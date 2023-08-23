@@ -15,7 +15,7 @@ const logregbuild = new LoginBuild()
     * ************************** */
 
 //routes vehicle management routes authorization view
-router.get('/', logregbuild.clientnotAuth, utilities.handleErrors(vmanage.buildmanageview))
+router.get('/', utilities.checkLogin, logregbuild.clientnotAuth, utilities.handleErrors(vmanage.buildmanageview))
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));

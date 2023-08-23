@@ -11,7 +11,7 @@ manageModel.registernewclassification = async (classification_name) =>{
         "INSERT INTO public.classification (classification_id, classification_name) values  (nextval('serial'),$1) returning *",
         [classification_name]
     )
-    //console.log("maybecsqlhere",sqlnewclass)
+    console.log("maybecsqlhere",sqlnewclass)
         return sqlnewclass
     } catch (error) {
     return error.message

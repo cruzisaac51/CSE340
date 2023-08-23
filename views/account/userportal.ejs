@@ -15,7 +15,7 @@
 
     <% if (user) { %>
         <h2>
-            Welcome <%= user %>
+            Welcome <%- user %>
         </h2>
     <% } %>
 
@@ -35,6 +35,12 @@
     <% if (type == "Client") {%> 
         <br>
     <% } %>
+
+    <h2>Message Center</h2>
+    <ul>
+        <li><p>You have <%= locals.count %> unread messages.</p></li>
+        <li>Go to <a href="/account/messages/<%- accountid %>">Inbox</a></li>
+    </ul>
 
 
 </section>

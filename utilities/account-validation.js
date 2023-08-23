@@ -198,4 +198,118 @@ const validate = {}
 
 
 
+    /*  **********************************
+    *  Update account password Validation Rules
+    * ********************************* */
+    validate.updateAccountPasswordRules = () => {
+        return [
+        // password is required and must be strong password
+        body("account_password")
+        .trim()
+        .isStrongPassword({
+            minLength: 12,
+            minLowercase: 1,
+            minUppercase: 1,
+            minNumbers: 1,
+            minSymbols: 1,
+        })
+        .withMessage("Password does not meet requirements."),
+        ]
+    }
+    /* ******************************
+    * Check updated password data
+    * ***************************** */
+    validate.checkUpdatePasswordData = async (req, res, next) => {
+        const { account_firstname, account_lastname, account_email, account_id } = res.locals.accountData
+        let errors = []
+        errors = validationResult(req)
+        if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/update-view", {
+            errors,
+            title: "Update Account",
+            nav,
+            account_firstname,
+            account_lastname,
+            account_email,
+            account_id,
+        })
+        return
+        }
+        next()
+    }
+
+    /*  **********************************
+    *  New Message Validation Rules
+    * ********************************* */
+    validate.newMessageRules = () => {
+        return [
+        // Recipient is required and must be a number
+        body("message_to")
+            .trim()
+            .isNumeric()
+            .withMessage("Please select a recipient."), // on error this message is sent.
+    
+        // Subject is required and must be string
+        body("message_subject")
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage("Please provide a subject."), // on error this message is sent.
+    
+        // Body is required and must be string
+        body("message_body")
+            .trim()
+            .isLength({ min: 1 })
+            .withMessage("Please provide a body."), // on error this message is sent.
+        ]
+    }
+
+     /* ******************************
+    * Check data and return errors or continue to sending new message
+    * ***************************** */
+    validate.checkNewMessageData = async (req, res, next) => {
+        const { message_to, message_subject, message_body } = req.body
+        let errors = []
+        errors = validationResult(req)
+        if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/send-message", {
+            errors,
+            title: "New Message",
+            nav,
+            message_to,
+            message_subject,
+            message_body,
+        })
+        return
+        }
+        next()
+    }
+
+     /* ******************************
+    * Check data and return errors or continue to sending new message
+    * ***************************** */
+    validate.checkReplyMessageData = async (req, res, next) => {
+        const { message_to, message_subject, message_body } = req.body
+        let errors = []
+        errors = validationResult(req)
+        if (!errors.isEmpty()) {
+        let nav = await utilities.getNav()
+        res.render("account/reply-message", {
+            errors,
+            title: message_subject,
+            nav,
+            message_to,
+            message_subject,
+            message_body,
+        })
+        return
+        }
+        next()
+    }
+  
+
+
+
+
 module.exports = validate
