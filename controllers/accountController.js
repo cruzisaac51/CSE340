@@ -286,7 +286,7 @@ class LoginBuild {
             hashedPassword = await bcrypt.hashSync(account_password, 10)
         } catch (error) {
             req.flash("notice", 'Sorry, there was an error processing the registration.')
-            res.status(501).render("account/registration", {
+            res.status(501).render("./account/registration", {
             title: "Create Your Account",
             nav,
             errors: null,
@@ -298,19 +298,13 @@ class LoginBuild {
                 "notice",
                 `Congratulations, you're registered ${account_firstname}. Please log in.`
             )
-            res.locals.loggedin = 1
-            return res.status(201).render("./account/login", {
-                title: "Sign in",
-                nav,
-                errors: null,
-            });
+            return res.status(201).redirect("/account/login");
             
         } else {
             req.flash("notice", "Sorry, the registration failed.")
             return res.status(501).render("./account/registration", {
                 title: "Create Your Account",
                 nav,
-                errors: null,
             })
         }
     }

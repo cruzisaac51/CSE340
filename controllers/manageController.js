@@ -1,17 +1,21 @@
 const utilities = require("../utilities/")
 const manageModel = require("../models/managevehicle-mkodel")
+const accountModel = require("../models/account-model");
 
 
 const manageCont = {}
 
     manageCont.buildmanageview  = async(req, res, next) =>{
         let nav = await utilities.getNav()
+        const account_id = parseInt(req.params.accId)
+        const updateResult = await accountModel.infoUserAcount(account_id)
         const classificationSelect = await utilities.buildaddnewcarform()
         res.render("./inventory/management", {
         title: 'vehicle management',
         nav,
         errors: null,
         classificationSelect,
+        account_id: updateResult.account_id,
         })
     }
 
@@ -42,7 +46,9 @@ const manageCont = {}
 
     manageCont.registernewclassification = async(req, res) => {
         let nav = await utilities.getNav();
+        const account_id = parseInt(req.params.accId)
         const classificationSelect = await utilities.buildaddnewcarform()
+        const updateResult = await accountModel.infoUserAcount(account_id)
         const { add_classificationname } = req.body;
         const regResult = await manageModel.registernewclassification(add_classificationname);
         if (regResult) {
@@ -50,13 +56,7 @@ const manageCont = {}
                 "notice",
                 `Congratulations, you registered a new classification.`
             )
-            let newnav = await utilities.getnewNav();
-            return res.status(201).render("./inventory/management", {
-                title: 'vehicle management',
-                nav : `${newnav}`,
-                classificationSelect,
-                errors: null,
-            })
+            return res.status(201).redirect("/inv/")
         } else {
             req.flash("notice", "Sorry, the registration failed.")
             return res.status(501).render("./inventory/addclassification", {
@@ -83,12 +83,7 @@ const manageCont = {}
                 `Congratulations, you registered a new Vehicle.`
             )
             console.log("what are the values?",regResult)
-            return res.status(201).render("./inventory/management", {
-                title: 'vehicle management',
-                nav,
-                classificationSelect: `${grid1}`,
-                errors: null,
-            })
+            return res.status(201).redirect("/inv/")
         } else {
             req.flash("notice", "Sorry, the registration failed.")
             return res.status(401).render("./inventory/addinventory", {
