@@ -11,7 +11,7 @@
 body {
   margin:0;
   padding:0;
-  background-image: url(../images/site/small_check.jpg);
+  /*background-image: url(../images/site/small_check.jpg);*/
 }
 #wrapper {
   background-color: white;
@@ -35,6 +35,7 @@ body {
 }
 .index-page{
   margin-top: 5.45em;
+  background-color: lightgrey;
 }
 .siteName{
   font-size: xx-large;
@@ -142,36 +143,41 @@ body {
   margin:5px;
 }
 .banner-one {
-  margin-bottom: 20px;
+  height: 20rem;
 }
 .hero {
   background-image: url(../images/vehicles/delorean.jpg);
-  height: 200px;
-  background-size: contain;
+  height: 184px;
+  background-size: cover;
   background-repeat: no-repeat;
-  position: relative;
-  margin-left: 35px;
+  background-position: center;
+  margin: 5px;
 }
 .action{
-  background-color: rgba(255, 255,255,.3);
+  background-color: rgb(0 0 0 / 74%);
   color: cornflowerblue;
-  width: fit-content;
   display: flex;
-  flex-direction: column;
   gap: 5px;
   padding: 5px;
-  margin-left: -15px;
+  align-items: center;
+  position: relative;
+  flex-wrap: wrap;
+  top: 190px;
+  justify-content: center;
 }
 .action ul {
-  list-style: none;
+  list-style: disc;
+  margin-left: 49px;
 }
 .action button{
-  background-color: blueviolet;
-  color: black;
-  font-size: larger;
-  font-weight: bolder;
-  border-radius: 5px;
-  height: 2em;
+  background-color: #1562d1;
+    color: white;
+    font-size: larger;
+    font-weight: bolder;
+    border-radius: 5px;
+    height: 2em;
+    width: 88%;
+    margin-left: 22px;
 }
 
 .login-page, .register-page, .user-page{
@@ -489,31 +495,39 @@ input:not(:focus):not(:placeholder-shown):valid {
   .boudy {
     display: flex;
     justify-content: center;
+    margin: 0;
   }
   .index-page{
     display: flex;
     flex-direction: column;
     width: -webkit-fill-available;
-    margin-left: 1em;
-    margin-right: 1em;
+    background-color: lightgrey;
+    margin-top: 4em;
   }
   .siteName{
     font-size: 3.5em;
   }
   #tools {
     font-size: x-large;
+    position: absolute;
+    right: 20px;
+    top: 163px;
+    padding: 5px;
+    background-color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 5000;
   }
   #top-header {
     display: flex;
     background: black;
-    padding: 5px;
-    border: 5px solid white;
+    border: none;
+    border-bottom: 2px solid white;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     width: -webkit-fill-available;
-    height: auto;
-}
+  }
   .menu-btn {
     display: contents;
   }
@@ -529,7 +543,7 @@ input:not(:focus):not(:placeholder-shown):valid {
     transition: unset;
     justify-content: space-evenly;
     width: -webkit-fill-available;
-    margin: 0px 5px;
+    overflow: hidden;
   }
   .navbar ul.nav-menu li {
     padding: 20px;
@@ -547,6 +561,7 @@ input:not(:focus):not(:placeholder-shown):valid {
     background-color: white;
     padding: 15px;
     color: black;
+    transform: translateY(-8px);
   }
   .navbar ul.nav-menu li a {
     text-decoration: none;
@@ -556,28 +571,47 @@ input:not(:focus):not(:placeholder-shown):valid {
   .navbar ul.nav-menu li:last-child {
     border-bottom: none;
   }
-  .navbar ul.nav-menu li a:hover{
+  .navbar ul.nav-menu li:hover a{
     color: black;
     padding: 2em;
     font-size: x-large;
   }
   .hero {
     background-image: url(../images/vehicles/delorean.jpg);
-    height: 24vmax;
+    height: 21vmax;
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
     background-position: right;
+    margin-right: 21px;
+    margin-left: 20px;
   }
-  #wrapper{
+  .welcometitle {
+    position: relative;
+    top: -70px;
+    margin-left: 15px;
+  }
+  .banner-one {
+    height: auto;
+  }
+  /* #wrapper{
     border: 5px solid cornflowerblue;
     width: 90%;
     height: 90%;
     margin: 70px;
     border-radius: 10px;
-  }
+  } */
   .action{
-    margin-left: 100px;
+    width: 45%;
+    top: auto;
+    height: -webkit-fill-available;
+  }
+  .action button {
+    cursor: pointer;
+  }
+  .action button:hover {
+    font-size: xx-large;
+    border: 5px solid red;
   }
   .action h2 {
     font-size: 5vmax;
@@ -591,10 +625,10 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .details ul {
     font-size: larger;
-    -webkit-user-modify: read-write-plaintext-only;
   }
   .upgrades {
     width: 33vmax;
+    margin-bottom: 20px;
   }
   #inv-display{
     display: grid;
@@ -678,5 +712,16 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .signup {
     margin-top: 1em;
+  }
+  .file-upload-button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .file-upload-button:hover {
+    background-color: #0056b3;
   }
 }

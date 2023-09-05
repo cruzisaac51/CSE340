@@ -10,5 +10,8 @@
             "name": "render.com",
             "connectString": "postgres://democse340:XVITLPr0oG0Xm4IDt4hTlPJEifWdDgCJ@dpg-ch7i6n02qv26p1daor1g-a.frankfurt-postgres.render.com/democse340"
         }
-    ]
+    ],
+    "workbench.colorCustomizations": {
+        "[Default Dark Modern]": {}
+    }
 }

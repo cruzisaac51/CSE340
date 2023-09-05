@@ -56,3 +56,27 @@ form.addEventListener("change", function () {
     const updateBtn = document.querySelector("button")
     updateBtn.removeAttribute("disabled")
 })
+
+
+function handleImageUpload() {
+    const imageInput = document.getElementById('image');
+    const selectedImage = imageInput.files[0];
+    // Aquí puedes realizar acciones con el archivo de imagen seleccionado
+    console.log('Selected Image:', selectedImage);
+}
+
+    // Función para manejar la selección de un archivo de miniatura
+function handleThumbnailUpload() {
+    const thumbnailInput = document.getElementById('thumbnail');
+    const selectedThumbnail = thumbnailInput.files[0];
+    // Aquí puedes realizar acciones con el archivo de miniatura seleccionado
+    console.log('Selected Thumbnail:', selectedThumbnail);
+}
+
+document.querySelector('.file-upload-button-image').addEventListener('click', function () {
+    handleImageUpload();
+});
+
+document.querySelector('.file-upload-button-thumbnail').addEventListener('click', function () {
+    handleThumbnailUpload();
+});
