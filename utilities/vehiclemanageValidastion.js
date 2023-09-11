@@ -129,9 +129,9 @@ const managevalidate = {}
         const { classificationcars,add_makename,  add_modelname,add_description,add_price,add_year,add_miles,add_color } = req.body;
         let errors = []
         errors = validationResult(req)
-        console.log("maybevalitaionhere",errors)
+        console.log("vehiclevalitaionhere",errors)
         if (!errors.isEmpty()) {
-            console.log("maybevalitaionhere",errors[0])
+            console.log("vehiclevalitaionhere2",errors[0])
             const grid = await utilities.buildaddnewcarform()
             let nav = await utilities.getNav()
             res.render("./inventory/addinventory", {
@@ -166,7 +166,6 @@ const managevalidate = {}
         return [
             body("classificationcars")
             .notEmpty()
-            .isString()
             .withMessage("Please choose a classification."),
 
             body("edit_makename")
@@ -226,12 +225,25 @@ const managevalidate = {}
     * Check data and return errors or continue to edit Vehicle
     * ***************************** */
      managevalidate.checkUpdateData = async (req, res, next) => {
-        const {classificationcars, edit_makename,  edit_modelname, edit_description, edit_imagepath, edit_thumbnailpath, edit_price, edit_year, edit_miles, edit_color, inv_id } = req.body;
+        const { 
+            edit_makename,  
+            edit_modelname, 
+            edit_description, 
+            edit_imagepath, 
+            edit_thumbnailpath, 
+            edit_price, 
+            edit_year, 
+            edit_miles, 
+            edit_color,
+            classificationcars, 
+            inv_id 
+        } = req.body;
         let errors = []
         errors = validationResult(req)
-        console.log("maybevalitaionhere",errors)
+        console.log("classcarsvalue",classificationcars)
+        console.log("editvehiclevalitaionhere",errors)
         if (!errors.isEmpty()) {
-            console.log("maybevalitaionhere",errors[0])
+            console.log("editvehiclevalitaionhere2",errors[0])
             const grid = await utilities.buildaddnewcarform()
             let nav = await utilities.getNav()
             const itemData = await invModel.getVehicleById(inv_id)

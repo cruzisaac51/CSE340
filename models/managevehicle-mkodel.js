@@ -35,11 +35,11 @@ manageModel.registernewclassification = async (classification_name) =>{
 /* *****************************
 *   Register new vehicle
 * *************************** */
-manageModel.registernewvehicle = async (inv_image, inv_thumbnail, classification_id,inv_make, inv_model, inv_description, inv_price, inv_year,inv_miles, inv_color) =>{
+manageModel.registernewvehicle = async (classification_id,inv_make, inv_model, inv_description, inv_price, inv_year,inv_miles, inv_color) =>{
     try {
     const sqlnewcar = await pool.query(
-        "INSERT INTO public.inventory (inv_image, inv_thumbnail,classification_id,inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color) values  ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) returning *",
-        [inv_image, inv_thumbnail, classification_id,inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color]
+        "INSERT INTO public.inventory (inv_image, inv_thumbnail,classification_id,inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color) values  ('/images/vehicles/no-image.png','/images/vehicles/no-image-tn.png',$1,$2,$3,$4,$5,$6,$7,$8) returning *",
+        [classification_id,inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color]
     )
     //console.log("maybecsqlhere",sqlnewclass)
         return sqlnewcar
