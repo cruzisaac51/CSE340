@@ -79,3 +79,8 @@ START 5
 ## ########################################################
 ## Renew the database every 3 Months on render.com
 ## ########################################################
+
+## ########################################################
+## Remember to also update the string of the DATABASE_URL variable of the .env document 
+## and the "connectString" variable from the settings.json document after performing the database renewal.
+## ########################################################
