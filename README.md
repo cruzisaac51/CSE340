@@ -52,10 +52,30 @@ When you installed Git and cloned the remote repository in week 1, you should ha
 2. As you proceed with the PostgreSQL database setup, you will be prompted to furnish an instance name and a database name, ensuring that both names match. Additionally, select the region that is geographically proximate to the end user to ensure optimal performance. You will be presented with the choice to either opt for a paid instance or avail yourself of the complimentary version, which remains valid for a duration of three months, after which it will be automatically deactivated.
 
 3. Upon confirming your preferred payment plan selection, proceed by clicking the "Create Database" button. It is of paramount importance to establish a connection between your project and the database during the creation process through the utilization of the .env file, assuming that the .env file has been previously configured. This connection will necessitate the use of the access token associated with your project. If you are utilizing the free version of the database, please take note that it will be replaced every three months. Consequently, it is crucial to consistently update the database URL to reflect the new database location.
-
+## PGadmin4
 4. In order to seamlessly connect your database instance with the PGAdmin4 application, you will require specific information, including the database hostname, external URL, and the SSL mode parameter set to "prefer." Additionally, the password provided within the database information section on the render.com platform will be needed. As a helpful recommendation, consider using the "remember the password" option to streamline the process, minimizing the need to repeatedly enter credentials when connecting to the render.com platform and the PGadmin4 app. 
 
 5. For users of the free database version, it is imperative to bear in mind that every three months, the existing database must be deleted, and the connection must be redirected to the new database. Consequently, the entire aforementioned process should be reiterated accordingly.
 
 ## database file to work.
 Upon initializing your server within the PGAdmin4 application, navigate to the query tool. Here, you should proceed to copy the contents of your 'db-sql-code' file and paste it into the query tool interface. Execute the provided code. Subsequently, replicate this process for the 'assignment2' file. If all tasks are executed successfully, please take a moment to acknowledge and commend yourself for your accomplishments.
+
+## Add the Admin ,the employee and the basic client(PGadmin4)
+## Admin
+UPDATE public.account
+SET account_type = 'Admin'
+WHERE account_id = 4
+## Employee
+UPDATE public.account
+SET account_type = 'Employee'
+WHERE account_id = 3
+
+## Create the secuences to add a new classification for the file managevehicle-mkodel.js (add just one time on pgadmin4)
+CREATE SEQUENCE IF NOT EXISTS public.serial
+INCREMENT 1
+START 5
+
+
+## ########################################################
+## Renew the database every 3 Months on render.com
+## ########################################################

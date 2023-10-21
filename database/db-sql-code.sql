@@ -1,8 +1,9 @@
 CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
-
+    
+-- switch every time renew the database
 ALTER TYPE public.account_type
-    OWNER TO demo341;
+    OWNER TO db34101_user;
 
 
 CREATE TABLE public.classification (

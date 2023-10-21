@@ -25,11 +25,10 @@ async function fetchHTML() {
     console.error('Fetch error:', error);
   }
 }
-
-// Llama a la función para obtener el HTML de la página web
+//call the function to obtain the HTML response
 fetchHTML();
 
-// Configura una solicitud cada 14 minutos (840,000 milisegundos)
+// Set a request every 14 minutes (840,000 milliseconds)
 const intervalMinutes = 14;
 const intervalMilliseconds = intervalMinutes * 60 * 1000;
 
