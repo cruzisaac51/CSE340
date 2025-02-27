@@ -13,6 +13,9 @@ body {
   padding:0;
   /*background-image: url(../images/site/small_check.jpg);*/
 }
+body ul {
+  list-style: none;
+}
 #wrapper {
   background-color: white;
 }
@@ -641,6 +644,10 @@ input:not(:focus):not(:placeholder-shown):valid {
     justify-content:flex-end;
     height: 10rem;
   }
+  .btn button:hover{
+    height: 7rem;
+    width: 17%;
+  }
   .btn button {
     display: flex;
     position: absolute;
@@ -662,6 +669,49 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .details {
     padding: 3rem;
+    flex-direction: column;
+    background: none;
+    color: white;
+  }
+  .reviews {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 79%;
+  }
+  .reviews h2 {
+    margin-right: 2rem;
+  }
+  .dr {
+    font-size: xx-large;
+    font-weight: bolder;
+  }
+  .price {
+    display: flex;
+    border: 1px solid gray;
+    padding: 3rem;
+    margin: 3rem;
+    align-items: center;
+  }
+  .price1 {
+    margin-right: 15rem;
+  }
+  .price1 p {
+    font-size: x-large;
+    font-weight: bold;
+  }
+  .price2 button {
+    font-size: x-large;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 1rem;
+  }
+  .detailsd {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 79%;
+    flex-direction: column;
   }
   .action button {
     cursor: pointer;
