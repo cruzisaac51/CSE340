@@ -8,7 +8,7 @@
             "server": "localhost",
             "driver": "PostgreSQL",
             "name": "render.com",
-            "connectString": "postgresql://db340ruser:O0zpTm43bOP8yOKX7P6Ly9vE83913XaE@dpg-cv08fk52ng1s73ejqcbg-a.frankfurt-postgres.render.com/db340r_y2te"
+            "connectString": "postgresql://db340tuser:anLf7nrUJA0eweEy0ukP3MTJVWpv1wxY@dpg-cvps8sh5pdvs73eeratg-a.frankfurt-postgres.render.com/db340t"
         }
     ],
     "workbench.colorCustomizations": {
