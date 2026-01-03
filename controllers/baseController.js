@@ -20,7 +20,7 @@ async function fetchHTML() {
     }
 
     const html = await response.text();
-    console.log('HTML received:', html);
+    //console.log('HTML received:', html);
   } catch (error) {
     console.error('Fetch error:', error);
   }
@@ -36,8 +36,8 @@ setInterval(fetchHTML, intervalMilliseconds);
 
 
 baseController.buildHome = async function(req, res){
-  const nav = await utilities.getNav()
-  res.render("index", {title: "Home", nav})
+  //const nav = await utilities.getNav()
+  res.render("index", {title: "Home"})
 }
 
 module.exports = baseController

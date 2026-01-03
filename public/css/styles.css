@@ -23,11 +23,9 @@ body ul {
   display: flex;
   width: 75%;
   height: 5.5em;
-  background: black;
   flex-direction: column;
   align-items: center;
   padding: 5px;
-  border: 5px solid white;
 
 }
 #top-header a {
@@ -39,17 +37,29 @@ body ul {
 .index-page{
   background-color: lightgrey;
 }
-.siteName{
+.siteName a{
+  text-decoration: none;
+  text-decoration-skip-ink:auto;
+  background: black;
+  color: white;
   font-size: xx-large;
 }
 #tools{
   font-size: large;
+}
+#tools a {
+  text-decoration: none;
+  text-decoration-skip-ink:auto;
+  background: black;
+  color: white;
 }
 
 .navbar{
   display: flex;
   position: relative;
   z-index: 2;
+  background-color: #000000;
+  align-items: center;
 }
 
 .menu-btn {
@@ -146,11 +156,33 @@ body ul {
 /* .boudy{
   margin:5px;
 } */
- .btn{
-  height: 5rem;
- }
+.btn{
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  right: 5rem;
+  top: 40rem;
+}
+.btn button{
+  display: flex;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 59%;
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: white;
+  font-weight: bolder;
+  font-size: 2.5rem;
+  cursor: pointer;
+  align-items: center;
+  margin: 2rem;
+}
+.btn button:hover {
+  height: 9rem;
+  font-size: xxx-large;
+}
 .banner-one {
-  height: 20rem;
+  height: 50rem;
 }
 /* .hero {
   position: relative;
@@ -227,7 +259,6 @@ body ul {
 #top-header #logout {
   padding: 3px;
   border-radius: 3px;
-  border: 1px solid white;
   margin: 5px;
 }
 #top-header #logout:hover {
@@ -381,12 +412,62 @@ input:not(:focus):not(:placeholder-shown):valid {
 }
 .details{
   display: flex;
-  background: ghostwhite;
   justify-content: space-evenly;
   align-items: center;
+  color: white;
+  padding: 3rem;
+  flex-direction: column;
+  background: none;
+}
+.detailsd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 79%;
+  flex-direction: column;
+}
+
+.price {
+  display: flex;
+  border: 1px solid gray;
+  padding: 3rem;
+  margin: 3rem;
+  align-items: center;
+}
+.price1 {
+  margin-right: 15rem;
+}
+.price1 p {
+  font-size: x-large;
+  font-weight: bold;
+}
+.price2 button {
+  font-size: x-large;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 1rem;
+}
+.detailsd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 79%;
+  flex-direction: column;
 }
 .details ul {
   margin-left: 20px;
+}
+.details ul li{
+  padding: 5px;
+}
+.reviews {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 79%;
+}
+.reviews h2 {
+  margin-right: 2rem;
 }
 /* .parts {
   width: 50%;
@@ -394,8 +475,16 @@ input:not(:focus):not(:placeholder-shown):valid {
   flex-direction: column;
   align-items: center;
 } */
+.upgradestitle {
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 3rem;
+  margin: 3rem;
+}
 .upgrades{
   display: flex;
+  height: 20rem;
   justify-content: space-around;
 }
 .imgupgrade {
@@ -404,14 +493,11 @@ input:not(:focus):not(:placeholder-shown):valid {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  width: 20rem;
+  width: 30rem;
 }
 
 .imgupgrade img {
-  width: 5em;
-  height: auto;
-  margin: 5px 0 40px 0;
+  width: 10em;
 }
 .imgname {
   position: absolute;
@@ -532,6 +618,7 @@ input:not(:focus):not(:placeholder-shown):valid {
   .boudy {
     display: flex;
     justify-content: center;
+    flex-direction:column;
   }
   .index-page{
     display: flex;
@@ -539,8 +626,12 @@ input:not(:focus):not(:placeholder-shown):valid {
     width: -webkit-fill-available;
     background-color: lightgrey;
   }
-  .siteName{
+  .siteName a{
     font-size: 3.5em;
+    text-decoration: none;
+    text-decoration-skip-ink:auto;
+    background: black;
+    color: white;
   }
   #tools {
     font-size: x-large;
@@ -556,10 +647,10 @@ input:not(:focus):not(:placeholder-shown):valid {
     display: flex;
     position: absolute;
     border: none;
-    border-bottom: 2px solid white;
+    right: 0;
+    width: 10%;
     flex-direction: row;
-    width: -webkit-fill-available;
-    z-index: 1;
+    z-index: 3;
   }
   .menu-btn {
     display: contents;
@@ -626,7 +717,7 @@ input:not(:focus):not(:placeholder-shown):valid {
     right: 0;
     bottom: 0;
     background-image: url(../images/vehicles/delorean.jpg);
-    background-size: 100% 75%;
+    background-size: 100% 90%;
     background-repeat: no-repeat;
     z-index: 0;
     max-width: -webkit-fill-available;
@@ -637,30 +728,17 @@ input:not(:focus):not(:placeholder-shown):valid {
     margin-left: 15px;
   }
   .banner-one {
-    height: 37rem;
+    height: 50rem;
   }
   .btn {
     display: flex;
     justify-content:flex-end;
-    height: 10rem;
-  }
-  .btn button:hover{
-    height: 7rem;
-    width: 17%;
+    top: 40rem
   }
   .btn button {
-    display: flex;
-    position: absolute;
-    border-radius: 5px;
-    width: 15%;
     align-items: center;
     margin: 2rem;
-    background: rgba(0, 0, 0, 0.7);
-    border: none;
-    color: white;
-    font-weight: bolder;
-    font-size: xx-large;
-    cursor: pointer;
+    font-size: 2.5rem;
   }
   .btn button svg {
     width: 50%;
@@ -739,6 +817,13 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .upgrades {
     margin-bottom: 20px;
+  }
+  .upgradestitle {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 3rem;
   }
   #inv-display{
     display: grid;
@@ -839,6 +924,7 @@ input:not(:focus):not(:placeholder-shown):valid {
   .boudy {
     display: flex;
     justify-content: center;
+    flex-direction: column;
   }
   .index-page{
     display: flex;
@@ -846,8 +932,12 @@ input:not(:focus):not(:placeholder-shown):valid {
     width: -webkit-fill-available;
     background-color: lightgrey;
   }
-  .siteName{
+  .siteName a{
     font-size: 3.5em;
+    text-decoration: none;
+    text-decoration-skip-ink:auto;
+    background: black;
+    color: white;
   }
   #tools {
     font-size: x-large;
@@ -863,10 +953,12 @@ input:not(:focus):not(:placeholder-shown):valid {
     display: flex;
     position: absolute;
     border: none;
-    border-bottom: 2px solid white;
     flex-direction: row;
     width: -webkit-fill-available;
-    z-index: 1;
+  }
+  .dr {
+    font-size: xx-large;
+    font-weight: bolder;
   }
   .menu-btn {
     display: contents;
@@ -933,7 +1025,7 @@ input:not(:focus):not(:placeholder-shown):valid {
     right: 0;
     bottom: 0;
     background-image: url(../images/vehicles/delorean.jpg);
-    background-size: 100% 75%;
+    background-size: 100% 90%;
     background-repeat: no-repeat;
     z-index: 0;
     max-width: -webkit-fill-available;
@@ -942,9 +1034,9 @@ input:not(:focus):not(:placeholder-shown):valid {
     position: relative;
     margin-left: 15px;
   }
-  .banner-one {
+  /* .banner-one {
     height: 37rem;
-  }
+  } */
   /* #wrapper{
     border: 5px solid cornflowerblue;
     width: 90%;
@@ -984,6 +1076,25 @@ input:not(:focus):not(:placeholder-shown):valid {
   }
   .upgrades {
     margin-bottom: 20px;
+  }
+  .upgradestitle {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 3rem;
+  }
+  .imgupgrade {
+    position: relative;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 20rem;
+    border: 1px solid black;
+  }
+  .imgupgrade img {
+    width: 5em;
   }
   #inv-display{
     display: grid;

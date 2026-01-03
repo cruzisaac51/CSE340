@@ -9,55 +9,55 @@ require("dotenv").config()
  ************************** */
 const Util = {}
 
-  Util.getNav = async (req, res, next)=>{
-    try {
-      let data = await invModel.getClassifications();
-      let list = "<ul class='nav-menu'>";
-      list += '<li><a href="/" title="Home page">Home</a></li>';
-      data.rows.forEach((row) => {
-        list += "<li>";
-        list +=
-          '<a href="/inv/type/' +
-          row.classification_id +
-          '" class="active" title="See our inventory of ' +
-          row.classification_name +
-          ' vehicles">' +
-          row.classification_name +
-          "</a>";
-        list += "</li>";
-      });
-      list += "</ul>";
-      return list;
-    } catch (error) {
-      console.log("is here the errorr?", error);
-      throw error;
-    }
-  }
+  // Util.getNav = async (req, res, next)=>{
+  //   try {
+  //     let data = await invModel.getClassifications();
+  //     let list = "<ul class='nav-menu'>";
+  //     list += '<li><a href="/" title="Home page">Home</a></li>';
+  //     data.rows.forEach((row) => {
+  //       list += "<li>";
+  //       list +=
+  //         '<a href="/inv/type/' +
+  //         row.classification_id +
+  //         '" class="active" title="See our inventory of ' +
+  //         row.classification_name +
+  //         ' vehicles">' +
+  //         row.classification_name +
+  //         "</a>";
+  //       list += "</li>";
+  //     });
+  //     list += "</ul>";
+  //     return list;
+  //   } catch (error) {
+  //     console.log("is here the errorr?", error);
+  //     throw error;
+  //   }
+  // }
 
-  Util.getnewNav = async (req, res, next)=>{
-    try {
-      let data = await invModel.getClassifications();
-      let list = "<ul class='nav-menu'>";
-      list += '<li><a href="/" title="Home page">Home</a></li>';
-      data.rows.forEach((row) => {
-        list += "<li>";
-        list +=
-          '<a href="/inv/type/' +
-          row.classification_id +
-          '" class="active" title="See our inventory of ' +
-          row.classification_name +
-          ' vehicles">' +
-          row.classification_name +
-          "</a>";
-        list += "</li>";
-      });
-      list += "</ul>";
-      return list;
-    } catch (error) {
-      console.log("is here the errorr?", error);
-      throw error;
-    }
-  }
+  // Util.getnewNav = async (req, res, next)=>{
+  //   try {
+  //     let data = await invModel.getClassifications();
+  //     let list = "<ul class='nav-menu'>";
+  //     list += '<li><a href="/" title="Home page">Home</a></li>';
+  //     data.rows.forEach((row) => {
+  //       list += "<li>";
+  //       list +=
+  //         '<a href="/inv/type/' +
+  //         row.classification_id +
+  //         '" class="active" title="See our inventory of ' +
+  //         row.classification_name +
+  //         ' vehicles">' +
+  //         row.classification_name +
+  //         "</a>";
+  //       list += "</li>";
+  //     });
+  //     list += "</ul>";
+  //     return list;
+  //   } catch (error) {
+  //     console.log("is here the errorr?", error);
+  //     throw error;
+  //   }
+  // }
 
 
 
