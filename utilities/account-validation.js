@@ -49,11 +49,11 @@ const validate = {}
         errors = validationResult(req)
         if (!errors.isEmpty()) {
             console.log("mybeisher", errors)
-            let nav = await utilities.getNav()
+            //let nav = await utilities.getNav()
             res.render("account/login", {
                 errors,
                 title: "Sign in",
-                nav,
+                //nav, 
                 account_email,
             })
         return
@@ -115,11 +115,11 @@ const validate = {}
         let errors = []
         errors = validationResult(req)
         if (!errors.isEmpty()) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         res.render("account/registration", {
             errors,
             title: "Create Your Account",
-            nav,
+            //nav, 
             account_firstname,
             account_lastname,
             account_email,
@@ -179,11 +179,11 @@ const validate = {}
         let errors = []
         errors = validationResult(req)
         if (!errors.isEmpty()) {
-            let nav = await utilities.getNav()
+            //let nav = await utilities.getNav()
             res.render("account/edituserinfo", {
                 errors,
                 title: "Edit Your Account",
-                nav,
+                //nav, 
                 edit_firstname,
                 edit_lastname,
                 edit_email,
@@ -222,11 +222,11 @@ const validate = {}
         let errors = []
         errors = validationResult(req)
         if (!errors.isEmpty()) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         res.render("account/update-view", {
             errors,
             title: "Update Account",
-            nav,
+            //nav, 
             account_firstname,
             account_lastname,
             account_email,
@@ -270,11 +270,11 @@ const validate = {}
         let errors = []
         errors = validationResult(req)
         if (!errors.isEmpty()) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         res.render("account/send-message", {
             errors,
             title: "New Message",
-            nav,
+            //nav, 
             message_to,
             message_subject,
             message_body,
@@ -292,11 +292,11 @@ const validate = {}
         let errors = []
         errors = validationResult(req)
         if (!errors.isEmpty()) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         res.render("account/reply-message", {
             errors,
             title: message_subject,
-            nav,
+            //nav, 
             message_to,
             message_subject,
             message_body,

@@ -9,55 +9,55 @@ require("dotenv").config()
  ************************** */
 const Util = {}
 
-  Util.getNav = async (req, res, next)=>{
-    try {
-      let data = await invModel.getClassifications();
-      let list = "<ul class='nav-menu'>";
-      list += '<li><a href="/" title="Home page">Home</a></li>';
-      data.rows.forEach((row) => {
-        list += "<li>";
-        list +=
-          '<a href="/inv/type/' +
-          row.classification_id +
-          '" class="active" title="See our inventory of ' +
-          row.classification_name +
-          ' vehicles">' +
-          row.classification_name +
-          "</a>";
-        list += "</li>";
-      });
-      list += "</ul>";
-      return list;
-    } catch (error) {
-      console.log("is here the errorr?", error);
-      throw error;
-    }
-  }
+  // Util.getNav = async (req, res, next)=>{
+  //   try {
+  //     let data = await invModel.getClassifications();
+  //     let list = "<ul class='nav-menu'>";
+  //     list += '<li><a href="/" title="Home page">Home</a></li>';
+  //     data.rows.forEach((row) => {
+  //       list += "<li>";
+  //       list +=
+  //         '<a href="/inv/type/' +
+  //         row.classification_id +
+  //         '" class="active" title="See our inventory of ' +
+  //         row.classification_name +
+  //         ' vehicles">' +
+  //         row.classification_name +
+  //         "</a>";
+  //       list += "</li>";
+  //     });
+  //     list += "</ul>";
+  //     return list;
+  //   } catch (error) {
+  //     console.log("is here the errorr?", error);
+  //     throw error;
+  //   }
+  // }
 
-  Util.getnewNav = async (req, res, next)=>{
-    try {
-      let data = await invModel.getClassifications();
-      let list = "<ul class='nav-menu'>";
-      list += '<li><a href="/" title="Home page">Home</a></li>';
-      data.rows.forEach((row) => {
-        list += "<li>";
-        list +=
-          '<a href="/inv/type/' +
-          row.classification_id +
-          '" class="active" title="See our inventory of ' +
-          row.classification_name +
-          ' vehicles">' +
-          row.classification_name +
-          "</a>";
-        list += "</li>";
-      });
-      list += "</ul>";
-      return list;
-    } catch (error) {
-      console.log("is here the errorr?", error);
-      throw error;
-    }
-  }
+  // Util.getnewNav = async (req, res, next)=>{
+  //   try {
+  //     let data = await invModel.getClassifications();
+  //     let list = "<ul class='nav-menu'>";
+  //     list += '<li><a href="/" title="Home page">Home</a></li>';
+  //     data.rows.forEach((row) => {
+  //       list += "<li>";
+  //       list +=
+  //         '<a href="/inv/type/' +
+  //         row.classification_id +
+  //         '" class="active" title="See our inventory of ' +
+  //         row.classification_name +
+  //         ' vehicles">' +
+  //         row.classification_name +
+  //         "</a>";
+  //       list += "</li>";
+  //     });
+  //     list += "</ul>";
+  //     return list;
+  //   } catch (error) {
+  //     console.log("is here the errorr?", error);
+  //     throw error;
+  //   }
+  // }
 
 
 
@@ -207,5 +207,33 @@ const Util = {}
 
 
 
-module.exports = Util
+  /* **************************************
+  * Build the parts view HTML
+  * ************************************ */
+  Util.buildPartsGrid = async (data) => { 
+    try {
+      let grid = "" 
+      if(data.length > 0){ 
+        grid = '<ul id="inv-display">' 
+        data.forEach(part => { 
+          grid += '<li class="inv-displayli imgupgrade">'
+          grid += '<img src="' + part.part_thumbnail +'" alt="Image of '+ part.part_name +'">'
+          grid += '<div class="namePrice">'
+          grid += '<h2>' + part.part_name + '</h2>'
+          grid += '<p style="color: var(--text-primary); font-size: small; padding: 5px;">' + part.part_description + '</p>'
+          grid += '<span style="font-size: x-large; font-weight: bold; color: var(--accent-color);">$' 
+          + new Intl.NumberFormat('en-US').format(part.part_price) + '</span>'
+          grid += '</div>'
+          grid += '</li>'
+        })
+          grid += '</ul>'
+        return grid
+      } else {
+          return '<p class="notice">Sorry, no matching parts could be found.</p>' 
+      } 
+    } catch(error) {
+      throw error;
+    }
+  }
 
+module.exports = Util

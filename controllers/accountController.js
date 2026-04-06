@@ -18,10 +18,10 @@ class LoginBuild {
     *  Build Login view.
     * ************************** */
     async buildLogin(req, res) {
-        let nav = await utilities.getNav();
+        ////let nav = await utilities.getNav();
         return res.render("./account/login", {
         title: "Sign in",
-        nav,
+        ////nav, 
         errors:null,
         });
     }
@@ -31,10 +31,10 @@ class LoginBuild {
     * ************************** */
 
     async buildregistration(req, res) {
-        let nav = await utilities.getNav();
+        ////let nav = await utilities.getNav();
         return res.render("./account/registration", {
         title: "Create Your Account",
-        nav,
+        ////nav, 
         errors: null,
         });
     }
@@ -43,7 +43,7 @@ class LoginBuild {
     *  Build user account view.
     * ************************** */
      async builduseraccountview(req, res, next){
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const account_id = parseInt(req.params.accId)
         const updateResult = await accountModel.infoUserAcount(account_id)
         const messages = await accountModel.getUnreadMessages(res.locals.account_id)
@@ -51,7 +51,7 @@ class LoginBuild {
         console.log("what account id is ?",account_id)
         res.render("./account/userportal", {
         title: 'Account management',
-        nav,
+        //nav, 
         errors: null,
         account_id: updateResult.account_id,
         count: count,
@@ -62,14 +62,14 @@ class LoginBuild {
     *  Deliver messages view
     * *************************************** */
     async buildMessages(req, res, next) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const message_from = parseInt(req.params.accId);
         const messages = await accountModel.getMessagesAndName(message_from)
         const archMessages = await accountModel.getArchivedMessages(message_from)
         const count = archMessages.length
         res.render("./account/messages", {
         title: ` Inbox`,
-        nav,
+        //nav, 
         errors: null,
         message_from: message_from,
         count: count,
@@ -81,13 +81,13 @@ class LoginBuild {
     *  Deliver archived messages view
     * *************************************** */
     async buildArchivedMessages(req, res, next) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const message_to = parseInt(req.params.accId);
         const archMessages = await accountModel.getArchivedMessages(message_to)
         console.log(archMessages)
         res.render("account/archived-messages", {
         title: `Archives`,
-        nav,
+        //nav, 
         errors: null,
         messagesArray: archMessages
         })
@@ -96,11 +96,11 @@ class LoginBuild {
     *  Deliver new message view
     * *************************************** */
     async buildNewMessage(req, res, next) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const message_from = res.locals.account_id
         res.render("account/send-message", {
         title: 'New Message',
-        nav,
+        //nav, 
         errors: null,
         message_from: message_from
         })
@@ -110,13 +110,13 @@ class LoginBuild {
     *  Deliver reply message view
     * *************************************** */
     async buildReplyMessage(req, res, next) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const message_from = res.locals.accountData.account_id
         const message_id = parseInt(req.params.messId);
         const message = await accountModel.getMessage(message_id)
         res.render("account/reply-message", {
         title: `RE: ${message.message_subject}`,
-        nav,
+        //nav, 
         errors: null,
         message_from: message_from,
         message_to: message.message_from,
@@ -129,13 +129,13 @@ class LoginBuild {
     *  Deliver view message view
     * *************************************** */
     async buildViewMessage(req, res, next) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const message_id = parseInt(req.params.messId);
         const message = await accountModel.getMessage(message_id)
         const sender = await accountModel.getAccountById(message.message_from)
         res.render("account/view-message", {
         title: message.message_subject,
-        nav,
+        //nav, 
         errors: null,
         message: message,
         sender_name: `${sender.account_firstname} ${sender.account_lastname}`
@@ -172,7 +172,7 @@ class LoginBuild {
     *  Send new message
     * *************************************** */
     async getNewMessage(req, res) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const { message_to, message_subject, message_body, message_from } = req.body
     
         const messageResult = await accountModel.newMessage(
@@ -191,7 +191,7 @@ class LoginBuild {
         req.flash("notice", "Sorry, the  message failed.")
         res.status(501).render(`./account/messages`, {
             title: `Inbox`,
-            nav,
+            //nav, 
             message_from: message_from
         })
         }
@@ -201,7 +201,7 @@ class LoginBuild {
     *  Send reply message
     * *************************************** */
     async getReplyMessage(req, res) {
-        let nav = await utilities.getNav()
+        //let nav = await utilities.getNav()
         const { message_to, message_subject, message_body, message_from, message_old } = req.body
         const messageResult = await accountModel.newMessage(
         message_to,
@@ -220,7 +220,7 @@ class LoginBuild {
         req.flash("notice", "Sorry, the  message failed.")
         res.status(501).render(`./account/messages`, {
             title: `Inbox`,
-            nav,
+            //nav, 
             message_from: message_from
         })
         }
@@ -231,10 +231,10 @@ class LoginBuild {
     * ************************** */
 
     async buildaccountupdateview(req, res) {
-        let nav = await utilities.getNav();
+        //let nav = await utilities.getNav();
         return res.render("./account/edituserinfo", {
         title: "Edit Your Account",
-        nav,
+        //nav, 
         errors: null,
         });
     }
@@ -244,7 +244,7 @@ class LoginBuild {
     * ************************** */
 
     async loginuserAccount(req, res) {
-        let nav = await utilities.getNav();
+        //let nav = await utilities.getNav();
         const { account_email, account_password } = req.body;
         const regResult = await accountModel.checkExistingEmail(account_email)
         if (!regResult) {
@@ -252,7 +252,7 @@ class LoginBuild {
             console.log("email??error");
             return res.status(401).render("./account/login", {
                 title: "Sign in",
-                nav,
+                //nav, 
                 errors: null,
             })
         }
@@ -278,7 +278,7 @@ class LoginBuild {
     * ************************** */
 
     async registeruserAccount(req, res) {
-        let nav = await utilities.getNav();
+        //let nav = await utilities.getNav();
         const { account_firstname, account_lastname, account_email, account_password } = req.body;
         let hashedPassword
         try {
@@ -288,7 +288,7 @@ class LoginBuild {
             req.flash("notice", 'Sorry, there was an error processing the registration.')
             res.status(501).render("./account/registration", {
             title: "Create Your Account",
-            nav,
+            //nav, 
             errors: null,
             })
         }
@@ -304,7 +304,7 @@ class LoginBuild {
             req.flash("notice", "Sorry, the registration failed.")
             return res.status(501).render("./account/registration", {
                 title: "Create Your Account",
-                nav,
+                //nav, 
             })
         }
     }
@@ -425,10 +425,10 @@ class LoginBuild {
      async editAccountview(req, res) {
         const account_id = parseInt(req.params.accId)
         const userdata = await accountModel.infoUserAcount(account_id)
-        let nav = await utilities.getNav();
+        //let nav = await utilities.getNav();
         return res.render("./account/edituserinfo", {
         title: "Edit Your Account",
-        nav,
+        //nav, 
         errors: null,
         account_firstname: userdata.account_firstname,
         account_lastname: userdata.account_lastname,
@@ -444,7 +444,7 @@ class LoginBuild {
     * ************************** */
 
     async editAccount(req, res){
-        let nav = await utilities.getNav();
+        //let nav = await utilities.getNav();
         const {edit_firstname, edit_lastname, edit_email, account_id} = req.body;
 
         const updateResult = await accountModel.editAccount(edit_firstname, edit_lastname, edit_email, account_id)
@@ -465,7 +465,7 @@ class LoginBuild {
           req.flash("notice", "Sorry, the update failed.")
           res.status(501).render("./account/edituserinfo", {
             title: "Edit Your Account",
-            nav,
+            //nav, 
             errors: null,
             edit_firstname: userdata.account_firstname,
             edit_lastname: userdata.account_lastname,

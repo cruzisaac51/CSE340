@@ -8,13 +8,13 @@ const invCont = {}
   invCont.buildByClassificationId  = async(req, res, next) =>{
     const classification_id = req.params.classificationId
     const data = await invModel.getInventoryByClassificationId(classification_id)
-    let nav = await utilities.getNav()
+    //let nav = await utilities.getNav()
     const className = data[0].classification_name
     //console.log("build", className)
     const grid = await utilities.buildClassificationGrid(data)
     res.render("./inventory/classification", {
       title: `${className}  vehicles`,
-      nav,
+      //nav, 
       grid,
     })
   }
@@ -35,10 +35,10 @@ const invCont = {}
     const title = `${yearv} ${makev} ${modelv}`
     const grid1 = await utilities.buildVehicleGrid(data1)
     //console.log("data1", data1);
-    const nav = await utilities.getNav()
+    //const nav = await utilities.getNav()
     res.render("./inventory/details", {
       title: `${title}`,
-      nav,
+      //nav, 
       grid1,
     })
   }
@@ -66,13 +66,13 @@ const invCont = {}
   * ************************** */
   invCont.editInventoryView = async function (req, res, next) {
     const inv_id = parseInt(req.params.inv_id)
-    let nav = await utilities.getNav()
+    //let nav = await utilities.getNav()
     const itemData = await invModel.getVehicleById(inv_id)
     const grid = await utilities.buildaddnewcarform()
     const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
     res.render("./inventory/editinventory", {
       title: "Edit " + itemName,
-      nav,
+      //nav, 
       grid,
       errors: null,
       classification_name: itemData[0].classification_name,
@@ -97,7 +97,7 @@ const invCont = {}
     * ************************** */
 
   invCont.updateInventory = async(req, res) => {
-    let nav = await utilities.getNav();
+    //let nav = await utilities.getNav();
     const {
       classificationcars,
       edit_makename,  
@@ -134,7 +134,7 @@ const invCont = {}
       req.flash("notice", "Sorry, the insert failed.")
       res.status(501).render("./inventory/editinventory", {
         title: "Edit " + itemName,
-        nav,
+        //nav, 
         grid,
         classification_name: itemData[0].classification_name,
         inv_make: itemData[0].inv_make,
@@ -161,12 +161,12 @@ const invCont = {}
   * ************************** */
   invCont.deleteView = async function (req, res, next) {
     const inv_id = parseInt(req.params.inv_id)
-    let nav = await utilities.getNav()
+    //let nav = await utilities.getNav()
     const itemData = await invModel.getVehicleById(inv_id)
     const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
     res.render("./inventory/deleteconfirm", {
       title: "Delete " + itemName,
-      nav,
+      //nav, 
       errors: null,
       inv_make: itemData[0].inv_make,
       inv_model: itemData[0].inv_model,
@@ -183,7 +183,7 @@ const invCont = {}
     *  check Deletation vehicle view.
     * ************************** */
   invCont.deleteItem = async (req, res, next) =>{
-    let nav = await utilities.getNav()
+    //let nav = await utilities.getNav()
     const inv_id = parseInt(req.body.inv_id)
     const deleteResult = await invModel.deleteInventoryItem(inv_id)
     if (deleteResult) {

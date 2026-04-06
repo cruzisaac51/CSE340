@@ -1,0 +1,25 @@
+<div class="regtitle">
+  <% if (title) { %>
+    <h1><%= title %></h1>
+    <% } %>
+</div>
+
+
+<%- messages() %>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<div style="display: flex; justify-content: flex-end; margin: 20px;">
+  <label for="sortMethod" style="margin-right: 10px; align-self: center; font-size: large;">Sort by Price: </label>
+  <select id="sortMethod" onchange="window.location.href = this.value;" style="padding: 10px; border-radius: 8px; cursor: pointer; background-color: var(--bg-card); color: var(--text-primary); border: 2px solid var(--border-color);">
+    <option value="/parts/sort/ASC" <%= sortBy === 'ASC' ? 'selected' : '' %>>Low to High</option>
+    <option value="/parts/sort/DESC" <%= sortBy === 'DESC' ? 'selected' : '' %>>High to Low</option>
+  </select>
+</div>
+
+<%- grid %>

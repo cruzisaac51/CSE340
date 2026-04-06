@@ -41,11 +41,11 @@ const managevalidate = {}
         errors = validationResult(req)
         console.log("maybevalitaionher1e",errors)
         if (!errors.isEmpty()) {
-            let nav = await utilities.getNav()
+            //let nav = await utilities.getNav()
             res.render("./inventory/addclassification", {
                 errors,
                 title: "vehicle new classification",
-                nav,
+                //nav, 
                 add_classificationname,
             })
             return
@@ -133,11 +133,11 @@ const managevalidate = {}
         if (!errors.isEmpty()) {
             console.log("vehiclevalitaionhere2",errors[0])
             const grid = await utilities.buildaddnewcarform()
-            let nav = await utilities.getNav()
+            //let nav = await utilities.getNav()
             res.render("./inventory/addinventory", {
                 errors,
                 title: "New vehicle",
-                nav,
+                //nav, 
                 grid,
                 classificationcars,
                 add_makename,  
@@ -245,13 +245,13 @@ const managevalidate = {}
         if (!errors.isEmpty()) {
             console.log("editvehiclevalitaionhere2",errors[0])
             const grid = await utilities.buildaddnewcarform()
-            let nav = await utilities.getNav()
+            //let nav = await utilities.getNav()
             const itemData = await invModel.getVehicleById(inv_id)
             const itemName = `${itemData[0].inv_make} ${itemData[0].inv_model}`
             res.render("./inventory/editinventory", {
                 errors,
                 title: "Edit " + itemName,
-                nav,
+                //nav, 
                 grid,
                 classification_name: itemData[0].classification_name,
                 inv_make:edit_makename,  

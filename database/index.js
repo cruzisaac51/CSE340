@@ -7,13 +7,17 @@ require("dotenv").config()
  * If - else will make determination which to use
  * *************** */
 let pool
-if (process.env.NODE_ENV == "development") {
-  pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  })
+if (process.env.MOCK_DB === "true" || process.env.MOCK_DB === "true\r" || process.env.MOCK_DB === "true\n") {
+  console.log("⚠️ EJECUTANDO EN MODO MOCK DB TEMPORAL ⚠️");
+  module.exports = require("./mock-db.js");
+} else {
+  if (process.env.NODE_ENV == "development") {
+    pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+    })
 
   // Added for troubleshooting queries
   // during development
@@ -36,6 +40,5 @@ if (process.env.NODE_ENV == "development") {
   })
   module.exports = pool
 }
-
-
+}
 //console.log("whtsiside pool", pool)

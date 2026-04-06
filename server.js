@@ -24,16 +24,23 @@ const logregbuild = new LoginBuild()
 /* ***********************
  * Middleware
  * ************************/
-app.use(session({
-  store: new (require('connect-pg-simple')(session))({
-    createTableIfMissing: true,
-    pool,
-  }),
+const sessionOptions = {
   secret: process.env.ACCESS_TOKEN_SECRET,
   resave: true,
   saveUninitialized: true,
   name: 'sessionId',
-}))
+};
+
+if (process.env.MOCK_DB !== "true" && process.env.MOCK_DB !== "true\r" && process.env.MOCK_DB !== "true\n") {
+  sessionOptions.store = new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  });
+} else {
+  console.log("⚠️ SESIONES EN MEMORIA TEMPORAL MOCK(SIN POSTGRES) ⚠️");
+}
+
+app.use(session(sessionOptions))
 
 
 // Express Messages Middleware
@@ -86,6 +93,9 @@ app.use("/inv", require("./routes/inventoryRoute"))
 //register route
 app.use("/account", require("./routes/accountRoute"))
 
+//Parts and upgrades Route
+app.use("/parts", require("./routes/partRoute"))
+
 //app.use("/management", require("./routes/vehiclemanageRoute"))
 
 
@@ -103,7 +113,7 @@ app.use(async (req, res, next) => {
 * Place after all other middleware
 *************************/
 app.use(async (err, req, res, next) => {
-  let nav = await utilities.getNav()
+  //let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message} - ${res.message} - ${next.message}`)
   if(err.status == 404){
      message = err.message
@@ -113,7 +123,7 @@ app.use(async (err, req, res, next) => {
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
-    nav,
+    //nav,
   })
 })
 
